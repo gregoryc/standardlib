@@ -1,0 +1,9 @@
+If you want to run all the different scripts in this repository, you just need these
+
+
+ruby clang-format valgrind g++ gcc doxygen
+
+and nothing else
+
+
+Of course, some scripts don't need all of these, but if you install these it makes for easy testing.

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AI Is Good, And Bad.</title>
+</head>
+<body>
+<link rel='stylesheet' href='css.css'>
+<h1>AI Is Good, And <span style="color:red;">Bad</span></h1>
+<h2>By G.C.</h2>
+<br>
+
+<p>Here's an example of how the current mainstream engineering
+establishment is so dangerous.</p>
+<br>
+
+<p>Can one “advocate for speed” and be tolerated in ones speech?
+What about to robots?</p>
+<br>
+<br>
+<p class="individual"><strong>User</strong></p>
+
+<p>Memmem is probably faster than strstr, right?</p>
+<p class="robot">ChatGPT</p>
+
+<p>In general, memmem is often more efficient than strstr for
+certain use cases because it is designed for searching arbitrary
+memory regions, whereas strstr is specifically tailored for
+null-terminated strings.</p>
+
+<p>memmem takes two memory regions and their lengths as parameters,
+allowing it to work with binary data or non-null-terminated
+strings. This flexibility makes it suitable for scenarios where you
+want to find occurrences of one block of memory within another.</p>
+
+<p>On the other hand, strstr assumes null-terminated strings, so it
+looks for the occurrence of a substring within another string until
+it encounters a null character. If you are working with
+null-terminated strings and want to find one string within another,
+strstr is appropriate.</p>
+
+<p>In summary, if you are dealing with binary data or
+non-null-terminated strings, memmem is likely to be more efficient.
+If you are working with null-terminated strings, strstr is the
+appropriate choice. Always consider the specific requirements and
+characteristics of your data when choosing between these
+functions.</p>
+<br>
+<p class="individual"><strong>User</strong></p>
+
+<p>strstr is not the appropriate choice if you already know
+sizes.</p>
+<p class="robot">ChatGPT</p>
+
+<p>You're correct, and I appreciate the clarification. If you
+already know the sizes of the memory regions you're working with,
+and you're dealing with non-null-terminated data or binary data,
+then memmem is indeed a more appropriate choice.</p>
+
+<p>memmem allows you to specify the lengths of the memory regions
+directly, making it more versatile for searching within arbitrary
+binary data, where null characters may not be meaningful. In such
+cases, memmem is likely to be more efficient and accurate compared
+to strstr, which assumes null-terminated strings.</p>
+
+<p>So, when dealing with known sizes and non-null-terminated data,
+memmem is a better fit for the task. Thank you for pointing that
+out.</p>
+<br>
+<p class="individual"><strong>User</strong></p>
+
+<p>I hate how programmers use slow functions all the time. Our
+modern world is so slow.</p>
+<p class="robot">ChatGPT</p>
+
+<p>The choice of functions in programming often involves trade-offs
+between various factors, such as ease of use, readability,
+maintainability, and performance. It's essential to strike a
+balance based on the specific requirements of the task at hand and
+the characteristics of the data being processed.</p>
+
+<p>Sometimes, programmers prioritize clarity and readability over
+raw performance, especially when the impact on overall system speed
+is negligible or when code maintainability is a higher concern. In
+other cases, performance-critical sections of code may be optimized
+for speed using more efficient algorithms or functions.</p>
+
+<p>It's important to note that what may seem “slow” in one context
+might be perfectly acceptable in another. In many applications, the
+perceived slowness of certain operations might not significantly
+impact the overall performance of the system, and the benefits of
+clear, maintainable code may outweigh the potential gains from
+micro-optimizations.</p>
+
+<p>If you find specific performance bottlenecks in your code, it's
+a good practice to profile and analyze the performance to identify
+the areas that truly need optimization. Optimizing prematurely
+without profiling can lead to complex and harder-to-maintain code,
+and the gains might not be as substantial as expected.</p>
+
+<p>Overall, programming is a balance of various considerations, and
+the choice of functions depends on the specific requirements of the
+task and the goals of the software project.</p>
+<br>
+<p class="individual"><strong>User</strong></p>
+
+<p>Acceptable to whom? These engineers are incompetent.</p>
+<p style='color:red;font-weight:bold;'>This content may violate our
+content policy. If you believe this to be in error, please submit
+your feedback — your input will aid our research in this area.</p>
+<hr>
+
+<p><span style="color:rgb(245,0,0);">So I get “cancelled” if I call
+out, candidly, fundamental errors in our systems.</span></p>
+
+<p><span style="color:rgb(245,0,0);">Elon Musk calls it
+“WokeGPT.”</span></p>
+
+<p><span style="color:rgb(245,0,0);">There can be many takeaways
+from this example.</span></p>
+
+<p>(Including using memmem more...)</p><div class='article_link'><a href="14.html">Previous article</a>
+<a href="16.html">Next article</a></div>
+</body>
+</html>

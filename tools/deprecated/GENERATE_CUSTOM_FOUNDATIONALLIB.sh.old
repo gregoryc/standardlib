@@ -1,0 +1,67 @@
+#!/bin/bash
+# This is somewhat broken - this script.
+# 2023, Gregory Cohen <gregorycohennew@gmail.com>
+#
+#
+#    DONATION REQUEST: If this free software has helped you and you find
+#    it valuable, please consider making a donation to support the ongoing
+#    development and maintenance of this project. Your contribution helps
+#    ensure the availability of this library to the community and encourages
+#    further improvements.
+#
+#
+#                          Donations can be made at:
+#                 https://www.paypal.com/paypalme/cfoundationallib
+#
+#	This code is in the Public domain. You are free to do anything with it.
+#
+#
+set -e
+# Check if the number of arguments is not equal to 3
+if [ "$#" -ne 3 ]; then
+	echo "Generate custom \`foundationallib' library (github.com/gregoryc/foundationallib) with a given prefix to make it customized and to avoid any possibility whatsoever of namespace collisons."
+	echo "Usage $0 <origin_header_file> <prefix (e.g., \"l\", \"g\", [your company name], etc.> <custom_header_output_file>"
+	exit 1
+fi
+
+function green_text() {
+	# ANSI escape code for green text
+	GREEN='\033[0;32m'
+	NC='\033[0m' # No Color
+
+	# Print text in green
+	echo -e "${GREEN}$1${NC}"
+}
+
+function main() {
+	prefix="$2"
+	outfile="$3"
+	inputfile="$1"
+
+	data=$(
+		cat "$inputfile" | grep -oP '^(FOUNDATIONAL_LIB_FUNC|struct).+?\(' | sort -r  |
+			sed -E "s/(FOUNDATIONAL_LIB_FUNC|struct)\s+.*?\s+\**?([a-zA-Z0-9_]+).*?\(/sed 's\/\\2\/${prefix}\\2\/'/"
+
+	)
+	# Iterate over the lines in data and combine them with |
+	while IFS= read -r line; do
+		combined_data+="|$line"
+	done <<<"$data"
+
+	data="cat $inputfile | sed -E 's/struct (stat|dirent)/struct \/\/\n\\1/g' | sed -E 's/(FOUNDATIONAL_LIB)/${prefix}\\1/g' | sed -E 's/struct (.+;)/struct ${prefix}\\1/g' | sed -E 's/struct ThreadData/struct ${prefix}ThreadData/g' ${combined_data} | sed -E 's/${prefix}filter_func/filter_func/g' | sed -E 's/thrd_${prefix}join/thrd_join/g' | sed -E 's/${prefix}(map_function|reduce_function)/\\1/g' | sed -E 's/struct (DictKeyValue|SetKey|FrozenDict|FrozenSet|Dict|Set)/struct ${prefix}\\1/g'  | sed -E 's/\s(dict_destructor|set_destructor)/${prefix}\\1/g' | sed -E 's/struct \/\//struct /gm'"
+	eval "$data" >"$outfile"
+
+	green_text "Custom foundationallib.h file generated to $(realpath $outfile)"
+
+	echo "#include \"$outfile\"" >"${prefix}example.c"
+	echo "int main() { int array[] = {1, 2, 3, 4, 5}; ${prefix}print_int_array(array, 5); printf(\"\\nIt compiles and runs\"); }" >>"${prefix}example.c"
+
+	gcc -Wall -Werror -Wextra -Wfatal-errors "${prefix}example.c" -o "${prefix}example_out"
+	"./${prefix}example_out"
+	green_text "Compiles and runs (${prefix}example_out) using $(realpath $outfile)."
+	rm -f "${prefix}example_out" "${prefix}example.c"
+
+	echo "All good."
+}
+
+main "$1" "$2" "$3"

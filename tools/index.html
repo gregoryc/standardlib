@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+
+transition: all 2s ease; /* Add transition for all properties over 0.3 seconds with ease timing function */
+}
+
+button {
+width: 150px;
+}
+
+button:hover {
+transform: rotate(2deg);
+width:300px;
+border-radius: 10px;
+border:0;
+box-shadow: 0px 0px 3px black;
+background-color: black;
+color: white;
+}
+
+a:visited {
+color: inherit;
+}
+
+
+a:hover {
+color: blue;
+}
+
+a {
+color: inherit;
+}
+
+
+
+strong {
+color: rgb(0, 90, 0);
+text-shadow: 1px 1px 1px rgb(0, 0, 20, 0.1);
+font-size: 120%;
+}
+hr {
+border: 0;
+padding: 0;
+margin: 0;
+border-bottom: 1px dotted rgb(200, 200, 200);
+height: 5px;
+width: 100%;
+}
+
+
+body {
+font-family: Verdana, Sans, sans-serif;
+margin: 0;
+padding: 0;
+}
+
+.pane p,h1,h2 {
+margin: 20px;
+}
+
+.pane {
+display: inline-block;
+float:left;
+width: 33%;min-height: 1500px;        }
+
+.features-list,
+.library-details {
+margin-top: 20px;
+}
+
+.features-list li {
+margin-bottom: 15px;
+color: rgb(0, 127, 0);
+text-decoration: underline;
+font-style: italic;
+margin-left: 0px;
+padding-bottom: 20px;
+border-bottom: 1px dotted rgb(200, 200, 200);
+}
+
+.performance {
+color: green;
+}
+  </style>
+  <title></title>
+</head>
+<body>
+  <div class="container">
+    <div class="pane" style='border: 0;border-right: 1px dotted rgb(200, 200, 200);'>
+      <h2 style="color: green;background-color: rgb(255, 255, 200);margin:0;padding-bottom:50px;padding: 25px; font-family: Serif;">Foundationallib (<a href=
+      "https://github.com/gregoryc/foundationallib">Github link</a>)</h2>
+      <ul class="features-list">
+      <li>→Zero Overhead (technically, it's 1 byte due to the power of the error handling)</li>
+      <li>→Static Inline Functions if you want them (optional)</li>
+      <li>→Custom allocators if you want it</li>
+      <li>→Custom error handling if you want it.</li>
+      <li>→Allows the programmer to dynamically choose to catch all errors in the functions with a handler (default or custom), or to ignore them. No need to ALWAYS say "if (.....) if you don't want to. Can be changed at runtime. Public domain so you make the code how you want, as well. (No need to "propitiate" to some "god" of some library).</li>
+      <li>→Minimal abstractions or indirection of any kind or needless things that complicate things - macros, namespace collision, typedefs, structs, object-orientation messes, bloat, etc., etc.</li>
+      <li>→No namespace pollution - you can generate your <span style=font-style:normal;><b>own version</b></span> with any prefix you like!</li>
+      <li>→Relies <span style=font-style:normal;>minimally</span> on C libraries<li>→<span style=font-style:normal;><b>Very
+      small</b></span> - 10K Lines of Code (including comments and documentation)</li><li>→No <span style='color:rgb(240, 0, 0);'>Linkage Issues</span> or <span style='color:rgb(240, 0, 0);'>dependency hell</span></li><li>→Thoroughly
+      Tested - 0 warnings or errors or memory leaks in Valgrind</li><li>→Good documentation</li><li>→
+      Free and open source - no licensing restrictions whatsoever</li><li>→Makes C like
+      Python or Perl or Ruby - or more easy</li>
+      </ul>
+      
+    </div>
+    <div class="pane" style='border: 0;border-right: 1px dotted rgb(200, 200, 200); background-color: rgb(255, 255, 190);'>
+      <div class="library-details">
+        <h2 style="color:green;"><i>What is this? Let me elaborate:</i></h2><br>
+        <br>
+        <br>
+        <p class="feature"><strong>Functional Programming Features</strong> - <code>map, reduce, filter,</code> List Comprehensions in C and much more!</p>
+        <p class="feature"><strong>Expands C's Primitives</strong> for easy manipulation of types such as <code>FrozenDict, Set, FrozenSet, FrozenDict, Arrays,
+        and Strings,</code> and provides easy manipulation, modification, alteration and duplication of these at a very comfortable level - something very,
+        very rare in C or C++, <i>all without any overhead.</i></p>
+        <p class="feature"><strong>More comfortable IO</strong> - read and write entire files with ease, and convert complex types into strings or print them
+        on the screen with ease.</p>
+        <p class="feature"><strong>A powerful general purpose foundational library</strong> has anything and everything you need - from <code>find_last_of()</code>
+        to to <code>list_comprehension()</code> to <code>shellescape()</code> to <code>read_file()</code> to
+        <code>string_to_json()</code> to <code>string_to_uppercase()</code> to <code>to_title_case()</code> to <code>map()</code> to <code>reduce()</code> to
+        <code>filter()</code> to <code>list_comprehension()</code> to <code>frozen_dict_new_instance()</code> - everything you would want to make quick and
+        optimally efficient C programs, this has it. And all without the overhead of external linkage - the code will be inlined and will be quicker than
+        anything else.</p>
+        <div style='height: 1px; border: 0;border-bottom: 1px dashed rgb(200, 200, 200);'></div>
+        <p class="performance"><span>Helps to make programs hundreds of times faster than other languages with similar ease of creation</span> - <b style=
+        "letter-spacing:1px;font-style:italic;">you don't want to be waiting <span style='color:rgb(240, 0, 0);'>a day</span> for an operation to complete when
+        it could take <span style='color:rgb(30, 30, 255);'>less than an hour</span>.</b></p>
+      </div>
+    </div>
+    <div class="pane" style="; background-color: rgb(240, 255, 240);">
+      <p><br>
+      <br>
+      <br>
+      <br></p>
+    </div>
+  </div>
+  <div style='width: 20%;position: fixed;bottom:0px;left:0px; width:100%; background-color: black; color: white; padding: 2%; opacity: 0.5;'></div>
+  <div style='width: 20%;position: fixed;bottom:0px;left:0px; width:100%; background-color: transparent; padding-top: 2%; padding-bottom: 3px;'>
+    <button style='display: inline-block; font-size: 120%;white-space:nowrap; font-family:Arial; overflow:hidden; position: relative; left: 60%;' onclick=
+    "window.location='https://github.com/gregoryc/foundationallib'">→ View library...</button>
+  </div>
+</body>
+</html>

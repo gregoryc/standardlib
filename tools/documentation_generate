@@ -1,0 +1,17 @@
+set -e
+set -x
+
+cd ../docs
+rm -r -f html
+doxygen Doxyfile || (
+	# We don't want absolute file paths
+	# recursively replace them with '.'
+	cd ..
+	echo $PWD
+	tools/rsub $PWD '.'
+	exit 1
+)
+
+cd ..
+echo $PWD
+tools/rsub $PWD '.'
