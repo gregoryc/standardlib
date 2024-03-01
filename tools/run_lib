@@ -1,0 +1,365 @@
+#!/usr/bin/env ruby
+$dangerous_c_functions_to_fail_to_compile_if_detected = [
+  "gets", "fgets",
+  "strcpy", "strcat",
+  "sprintf", "vsprintf",
+  "scanf", "fscanf",
+  "system",
+  "chown", "chmod", "chgrp",
+  "alloca",
+  "execl", "execle", "execlp", "execv", "execve", "execvp",
+  "bcopy", "bzero",
+]
+
+puts "Not using #{$dangerous_c_functions_to_fail_to_compile_if_detected.inspect}"
+
+file_name = "funcs_c"
+FILE_NAME = file_name
+at_exit do
+  system "rm -f destination_file.txt ex_ample.txt existing_file.txt source_file.txt"
+end
+
+NETWORKING = false
+
+if ARGV[0] == "short"
+  short = "short"
+elsif ARGV[0] == "supershort"
+  short = "supershort"
+else
+  short = ""
+end
+
+
+def format_file(file, suf = "")
+  #return
+
+  require "shellwords"
+
+  c = <<CMD
+clang-format -i -style="{BasedOnStyle: LLVM, IndentWidth: 4, UseTab: Never, IndentCaseLabels: true, ColumnLimit: 500, BreakBeforeBraces: Allman}" 
+CMD
+  #"
+  c.strip!
+  file = file.shellescape
+  c << " " << file
+  c << suf
+  puts c
+  system c, exception: true
+end
+
+def fix(string)
+  string.gsub(/\n{3,}/, "\n\n").gsub(/\*\/\n+FOUN/m, "*/\nFOUN")
+end
+
+def write_file(a, b)
+  File.write(a, fix(b))
+end
+
+FORMAT = true
+
+if FORMAT && short == ""
+  format_file file_name
+end
+
+
+VALGRIND = "valgrind --leak-check=full --show-leak-kinds=all --exit-on-first-error=yes --error-exitcode=1"
+if FORMAT
+  system "which clang-format > /dev/null", exception: true
+end
+require "fileutils"
+
+begin
+  FileUtils.cd "tools"
+rescue StandardError
+end
+
+begin
+  FileUtils.mkdir_p "../platforms/header_and_separate_compilation_unit"
+rescue StandardError
+end
+
+data = <<INTRO
+/*
+ *   2023, Gregory Cohen <gregorycohennew@gmail.com>
+ *
+ *
+ *   DONATION REQUEST: If this free software has helped you and you find
+ *   it valuable, please consider making a donation to support the ongoing
+ *   development and maintenance of this project. Your contribution helps
+ *   ensure the availability of this library to the community and encourages
+ *   further improvements.
+ *
+ *
+ *                          Donations can be made at:
+ *                 https://www.paypal.com/paypalme/cfoundationallib
+ *
+ *
+ *
+ * This code is in the public domain.
+ * 
+ * You are free to use it for any commercial or noncommercial purpose.
+ * 
+ */
+
+#ifndef _FOUNDATIONAL_LIB_HEADER_GUARD
+#define _FOUNDATIONAL_LIB_HEADER_GUARD
+
+#ifdef _WIN32
+#define _CRT_RAND_S
+#endif
+
+#include <stdint.h> /* FOR SIZE_MAX */
+#include <ctype.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <assert.h>
+
+/* Make sure memmem() is defined in all cases to avoid warnings or errors. */
+void *memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen);
+
+// structs (types)
+struct Dict;
+struct FrozenDict;
+struct Set;
+struct FrozenSet;
+
+#ifndef FOUNDATIONAL_LIB_AGGRESSIVE_DIE_TYPE
+/**
+ * @brief Type of the aggressive die variable.
+ *
+ * This macro defines the type of the aggressive die variable, which
+ * uses 1 byte of overhead by default. It can be configured as static
+ * or nonstatic based on user preference.
+ */
+#define FOUNDATIONAL_LIB_AGGRESSIVE_DIE_TYPE unsigned char
+#endif
+
+
+
+INTRO
+
+# C++ is more strict, so catch more possible errors
+write_file file_name, fix(File.read(file_name))
+
+def get_headers(foundational_lib_func_replacement, hg = true)
+  require "set"
+  malloc_func = false
+
+  current_func = ""
+
+  malloc_funcs = Set.new
+
+  file = File.read("funcs_c").gsub("static", "")
+
+  $dangerous_c_functions_to_fail_to_compile_if_detected.map do |i|
+    "(" + i + "\\([^\\n]+?\\)" + ")"
+  end.each do |q|
+    if match = file.match(/#{q}/mi)
+      raise match.to_s
+    end
+  end
+
+  if match = file.match(/^(size_t|void)/)
+    raise match.to_s
+  end
+  if match = file.match(/=\s*(malloc|realloc|calloc)\(/)
+    raise match.to_s
+  end
+  if match = file.match(/^\s*free\(/)
+    raise match.to_s
+  end
+
+  line_num = 0
+  match = file.gsub("char *", "").gsub("\n") do |i|
+    "\n#{line_num += 1}."
+  end.split("\n").grep(/ALLOC|CPY/).map do |i|
+    i.split("//")[0]
+  end.grep(/ [\*\-\+\/] /)
+  match -= match.grep(/FOUNDATIONAL_LIB_FUNC|#define|^.*\*\/\s*$|^\s*\d+\.\s*\* /)
+
+  match -= match.grep(/Safe/)
+
+  if match.size > 0
+    # If unsable allocation, fail to compile.
+    match.join("\n").gsub("()", "(char *)").split("\n").each_with_index do |i, index|
+      puts i
+      cmd = "micro +%s:80 %s" % [i.split(".", 2).first.to_i + 1, FILE_NAME]
+      puts cmd
+      system cmd
+      exit
+      puts "#{index} | #{i}"
+    end
+
+    exit if ARGV.first == "e"
+  end
+
+  file.split("\n").each_with_index do |line, index|
+    index += 1
+    if match = (line.match /(?:static inline|FOUNDATIONAL_LIB_FUNC) ([_0-9a-zA-Z\* ]+) ([\*_a-zA-Z0-9]+)\(.+/)
+      if match[2].match /test/
+      else
+        current_func = match[0].gsub("FOUNDATIONAL_LIB_FUNC", foundational_lib_func_replacement).split("{", 2)[0].strip
+      end
+      next
+    elsif line.match /FOUNDATIONAL_LIB_FUNC/
+      unless line.match /#ifndef|#define/
+        raise [index, line].inspect
+      end
+    end
+    if !malloc_func || ((line.match /FOUNDATIONAL_LIB_MEMORY_ALLOCATOR_/) && !line.match(/FOUNDATIONAL_LIB_MEMORY_ALLOCATOR_FREE|#ifndef|#ifdef|#define/))
+      # puts "%s" % [current_func, line.strip.clear]
+      unless current_func.strip == ""
+        malloc_funcs.add current_func + ";"
+      end
+    end
+  end
+  funcs = malloc_funcs.to_a.sort
+
+  # Remove internal functions like lib compare ushorts etc.
+  funcs -= funcs.grep(/FOUNDATIONAL/)
+
+  #  raise(match.to_s) if match = funcs.grep(/FOUNDATIONAL/)
+
+  hg = ""
+  hge = ""
+  if hg
+    hg = "#ifndef _FOUNDATIONAL_LIB_HEADER_GUARD
+#define _FOUNDATIONAL_LIB_HEADER_GUARD
+"
+
+    hge = "#endif"
+  end
+
+  "
+#{hg}
+#include <ctype.h>
+#include <stdarg.h>
+#include <stdio.h>
+#ifdef _WIN32
+#define _CRT_RAND_S
+#endif
+#include <stdlib.h>
+
+
+#include <string.h>
+
+
+#include <errno.h>
+
+
+#ifndef FOUNDATIONAL_LIB_AGGRESSIVE_DIE_TYPE
+/**
+ * @brief Type of the aggressive die variable.
+ *
+ * This macro defines the type of the aggressive die variable, which
+ * uses 1 byte of overhead by default. It can be configured as static
+ * or nonstatic based on user preference.
+ */
+#define FOUNDATIONAL_LIB_AGGRESSIVE_DIE_TYPE static unsigned char
+#endif
+
+struct Dict;
+struct FrozenDict;
+struct Set;
+struct FrozenSet;
+" << ($funcs = funcs.join("\n")) << "\n" << hge
+end
+
+# If even a single function is not documented, fail.
+nondocs = []
+
+File.read(file_name).gsub(/FOUNDATIONAL_LIB_([A-Z]+)\s*\nFOUNDATIONAL_LIB_FUNC [a-z]+ test[a-zA-Z0-9_]+/m) do |i|
+  raise i
+end
+
+File.read(file_name).gsub(/\}\s+(?:FOUNDATIONAL_LIB_[A-Z]+\s+)*(static inline|FOUNDATIONAL_LIB_FUNC)([^\n]+)/m) do |i|
+  nondocs << i
+  nil
+end
+
+nondocs -= nondocs.grep(/test/)
+unless nondocs.size == 0
+  puts nondocs
+  raise "lacking docs"
+end
+
+main = nil
+
+data2 = data + (File.read(file_name).gsub(/(int main|((FOUNDATIONAL_LIB_FUNC|static inline) (int|void|char) \**test.*?))\s*\(.*?\)\s*.*?\n\}/m) do |i|
+  if i.match /int main/
+    main = i
+  end
+
+  if i.match /#define/
+    raise i.to_s
+  end
+  ""
+end)
+raise if main.nil?
+DELIM = "Philosophy of this is in"
+data2 = data2.split(DELIM, 2)
+
+data2[1].gsub!(/^.*[tT]est.*$/, "")
+
+raise if data2[0].size < 100
+
+#puts data2[0]
+data2 = data2.join(DELIM)
+
+data2 = data2.gsub("#include <assert.h>\n", "") + "\n#endif"
+
+puts nondocs.sort
+write_file "HEADERS.h", get_headers("")
+write_file "HEADERS_ONLY_FUNCTIONS.h", $funcs + "\n"
+write_file "HEADERS_WITH_PREFIX.h", get_headers("FOUNDATIONAL_LIB_FUNC")
+write_file "foundationallib.h", data2
+write_file "../foundationallib.h", data2
+
+# If the person wants a module to link with,
+# then we change the per compilation unit aggressive die variable
+# (used to control error handling at runtime, it usually takes 1 byte
+# per compilation unit), and make it global
+# for the whole program - 1 byte of overhead to control error
+# handling (actually, this can save on code,
+# if aggressive die is set to true (1) )
+#
+# The variable will be defined in this file only, and not the header then.
+
+regex = /(FOUNDATIONAL_LIB_PURE|FOUNDATIONAL_LIB_NOTHROW|FOUNDATIONAL_LIB_MALLOC|FOUNDATIONAL_LIB_WARN_UNUSED_RESULT|FOUNDATIONAL_LIB_NONNULL|FOUNDATIONAL_LIB_PRINTF_FUNC)\n/m
+write_file("../platforms/header_and_separate_compilation_unit/foundationallib_noninline.c",
+           ("#include \"./foundationallib_noninline.h\"\n" + "#define FOUNDATIONAL_LIB_UNSAFE_FUNCTIONS_ENABLED 0\n\n" + data2.gsub(regex, " \\1 ").gsub(/static inline/, " ").gsub(/inline/, " ").gsub("#ifndef _FOUNDATIONAL_LIB_HEADER_GUARD\n#define _FOUNDATIONAL_LIB_HEADER_GUARD", "#if 1")))
+
+write_file "../platforms/header_and_separate_compilation_unit/foundationallib_noninline.h", get_headers("")
+format_file("../platforms/header_and_separate_compilation_unit/foundationallib_noninline.c", "&")
+
+write_file("../platforms/header_and_separate_compilation_unit_all_safe_funcs/foundationallib_noninline.c",
+           ("#include \"./foundationallib_noninline.h\"\n" + "#define FOUNDATIONAL_LIB_UNSAFE_FUNCTIONS_ENABLED 0\n\n" + data2.gsub(regex, " \\1 ").gsub(/static inline/, " ").gsub(/inline/, " ").gsub("#ifndef _FOUNDATIONAL_LIB_HEADER_GUARD\n#define _FOUNDATIONAL_LIB_HEADER_GUARD", "#if 1")))
+
+format_file("../platforms/header_and_separate_compilation_unit_all_safe_funcs/foundationallib_noninline.c", "&")
+write_file "../platforms/header_and_separate_compilation_unit_all_safe_funcs/foundationallib_noninline.h", "#define FOUNDATIONAL_LIB_UNSAFE_FUNCTIONS_ENABLED 0\n\n" + get_headers("")
+
+omit_list =/FOUNDATIONAL_LIB_PURE|FOUNDATIONAL_LIB_NOTHROW|FOUNDATIONAL_LIB_MALLOC|FOUNDATIONAL_LIB_WARN_UNUSED_RESULT|FOUNDATIONAL_LIB_NONNULL|FOUNDATIONAL_LIB_PRINTF_FUNC/m
+write_file "../docs/src/foundationallib.h", data2.gsub(omit_list, "")
+write_file wtests = file_name.sub(/_c.c$/, "") + "_with_tests.c", wtests_data = data.sub("struct FrozenSet;\n", "struct FrozenSet;\n\n#define test_foundationallib_test_error_handler(msg) perror(msg); exit(1);\n\n") + File.read(file_name) + "\n#endif"
+write_file "../tests/lib_and_tests.c", wtests_data
+puts "Copied."
+if ARGV[0] == "norun"
+  puts "No run"
+else
+  if NETWORKING
+    curl_flag = "-lcurl"
+  else
+    curl_flag = ""
+  end
+
+  # C++ is more strict, so catch more possible errors
+  cmd = "set -x; set -e;
+  gcc -DFOUNDATIONAL_LIB_LIBC_LOCKING_IO_OPERATIONS=0   -DFOUNDATIONAL_LIB_ASSERT_ARGUMENT_CHECKING=0 -O2 -pedantic -xc -m32 -g #{wtests} -o with_tests32 -Wall -Wextra -Werror -Wfatal-errors #{curl_flag} &&\\
+  g++ -DFOUNDATIONAL_LIB_ASSERT_ARGUMENT_CHECKING=1    -pedantic -xc++ -g #{wtests} -o with_tests -Wall -Wextra -Werror -Wfatal-errors #{curl_flag} &&\\
+./with_tests #{short}   && #{VALGRIND} ./with_tests #{short}"
+  puts cmd
+  system cmd, exception: true
+end

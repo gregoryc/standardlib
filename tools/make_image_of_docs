@@ -1,0 +1,741 @@
+#!/usr/bin/ruby
+
+require "colored"
+require "rouge"
+
+# make some nice lexed html
+source = File.read("HEADERS_ONLY_FUNCTIONS.h").gsub("static inline", "").split("\n")
+len = source.size
+bads = []
+bads = source.grep(/sort|print_|concatenate|equal|is_/)
+source -= bads
+source = source.join("\n") + "\n\n"
+
+C_CODE = <<C_CODE
+
+/*
+ * One is more capable of using a computer in general this way,
+ * with less power usage, quicker compilation time, interactive
+ * script creation and maximally-quick program execution.
+ *
+ * The best of all worlds, truly.
+ */
+void nice_easy_c_code()
+{
+    const char *file = "Line one\\nLine two line two\\nLine 3\\n";
+    size_t size;
+    char **lines = split(file, &size, "\\n", 0 /* max count */, 1 /* keep delims in? */);
+
+    assert(size == 4);
+    assert(equal_strings("Line one\\n", lines[0]));
+    assert(equal_strings("Line two line two\\n", lines[1]));
+    assert(equal_strings("Line 3\\n", lines[2]));
+    assert(equal_strings("", lines[3]));
+    
+    /* See how nice this C code is? It's so easy to do things. */
+
+    for (size_t i = 0; i < size; ++i)
+    {
+    	/* Strip the line, get rid of newline */
+        char *stripped = strip(lines[i]);
+        free(lines[i]);
+
+		/* Turn it into printable json */
+        char *json = string_to_json(stripped);
+        free(stripped);
+
+		/* Show it on screen */
+        puts(json);
+        free(json);
+    }
+
+    free(lines);
+}
+
+
+/* A more UNIX-centric example - but don't worry, Foundationallib is very cross-platform. */
+void do_things_on_a_unix_system_in_a_more_powerful_sort_of_c()
+{
+#ifdef __unix__
+    size_t size;
+
+    char *output = backticks("cd /tmp; pwd", &size);
+    assert(equal_strings(output, "/tmp\\n"));
+
+    char *output_replicated = (char *)replicate(output, FOUNDATIONAL_LIB_STRLEN(output) - 1 /* omit newline here */, sizeof(char *), 100);
+
+    puts(output_replicated);
+
+    free(output);
+    free(output_replicated);
+
+    puts("Getting input works (popen) works - output is '/tmp' on UNIX.");
+
+    /* See how nice this C code is? It's so easy to do things. */
+
+    if (file_exists("/usr/share/dict/words"))
+    {
+        puts("Reading words file into array.");
+        size_t lines;
+
+        // Lines have "\\n" at end.
+        char **words_file_lines = read_file_into_array("/usr/share/dict/words", "\\n", &lines);
+        assert(lines > 1000);
+
+        printf("/usr/share/dict/words is %zu lines and we can efficiently play around with it in a more easy fashion than Python.\\n", lines);
+        puts("Shuffling words");
+
+        // Shuffle all 100,000+ (or however many is in your words file) words in the dictionary in place.
+        shuffle_strings_in_place(words_file_lines, lines);
+
+        const size_t number_of_random_words_to_show_on_screen = rand_number_from_range_inclusive_unsigned(50, 120);
+
+        for (size_t i = 0; i < number_of_random_words_to_show_on_screen; ++i)
+        {
+            // Get rid of the newline.
+            char *word2 = strip(words_file_lines[i]);
+
+            // Make the words ready to be printed to stdout.
+            char *word3 = string_to_json(word2);
+            free(word2);
+
+            // Print the word to stdout
+            printf("Randomly chosen word is %s.\\n", word3);
+            free(word3);
+
+            // No need to free the words, you can use free_array() or free_string_array()
+        }
+        free_string_array(words_file_lines, lines);
+    }
+#endif
+}
+
+C_CODE
+
+#'
+C_CODE.gsub! /^.+$/ do |q|
+  q.sub(/\s+$/, "")
+end
+
+C_CODE.gsub!(/^\s+/) do |i|
+  #	"\t" * (i.size / 4)
+  "&nbsp;" * i.size
+end
+
+C_CODE2 = <<EOF
+/* Networking features are disabled by default. Use -DFOUNDATIONAL_LIB_NETWORK_FUNCTIONS_ENABLED=1 */
+
+
+/* Example - Download all the popular sites anywhere. */
+void test_downloading()
+{
+    const int byte_limit = 0;
+    const int how_many_to_download = 100;
+
+    for (int i = 0; i < 5; ++i)
+    {
+        size_t size;
+        size_t alloc_size;
+        const char *site = "https://www.google.com/";
+        char *string;
+        download_website(site, &string, &size, &alloc_size, 0 /* byte limit - no limit for how much (0) */, NULL /* ua - pretend to be chrome by default. */);
+        printf("size is %zu\\n", FOUNDATIONAL_LIB_STRLEN(string));
+        free(string);
+    }
+
+    // Array of 100 websites
+    const char *websites[100] = {
+        "https://www.google.com",
+        "https://www.youtube.com",
+        "https://www.facebook.com",
+        "https://www.twitter.com",
+        "https://www.instagram.com",
+        "https://www.linkedin.com",
+        "https://www.reddit.com",
+        "https://www.pinterest.com",
+        "https://www.tumblr.com",
+        "https://www.snapchat.com",
+        "https://www.twitch.tv",
+        "https://www.netflix.com",
+        "https://www.amazon.com",
+        "https://www.ebay.com",
+        "https://www.paypal.com",
+        "https://www.microsoft.com",
+        "https://www.apple.com",
+        "https://www.ibm.com",
+        "https://www.oracle.com",
+        "https://www.cnn.com",
+        "https://www.bbc.com",
+        "https://www.nytimes.com",
+        "https://www.washingtonpost.com",
+        "https://www.nationalgeographic.com",
+        "https://www.wikipedia.org",
+        "https://www.imdb.com",
+        "https://www.forbes.com",
+        "https://www.bloomberg.com",
+        "https://www.wsj.com",
+        "https://www.cnbc.com",
+        "https://www.espn.com",
+        "https://www.nba.com",
+        "https://www.nfl.com",
+        "https://www.mlb.com",
+        "https://www.nhl.com",
+        "https://www.etsy.com",
+        "https://www.walmart.com",
+        "https://www.target.com",
+        "https://www.bestbuy.com",
+        "https://www.craigslist.org",
+        "https://www.reddit.com/r/all",
+        "https://www.quora.com",
+        "https://www.stackoverflow.com",
+        "https://www.github.com",
+        "https://www.gitlab.com",
+        "https://www.bitbucket.org",
+        "https://www.ubuntu.com",
+        "https://www.debian.org",
+        "https://www.centos.org",
+        "https://www.docker.com",
+        "https://www.hub.docker.com",
+        "https://www.aws.amazon.com",
+        "https://www.azure.microsoft.com",
+        "https://www.gcp.google.com",
+        "https://www.heroku.com",
+        "https://www.wordpress.org",
+        "https://www.blogger.com",
+        "https://www.medium.com",
+        "https://www.trello.com",
+        "https://www.openai.com",
+        "https://www.slack.com",
+        "https://www.zoom.us",
+        "https://www.skype.com",
+        "https://www.whatsapp.com",
+        "https://www.telegram.org",
+        "https://www.viber.com",
+        "https://www.spotify.com",
+        "https://www.apple.com/music",
+        "https://www.soundcloud.com",
+        "https://www.last.fm",
+        "https://www.goodreads.com",
+        "https://www.coursera.org",
+        "https://www.udacity.com",
+        "https://www.edx.org",
+        "https://www.khanacademy.org",
+        "https://www.codecademy.com",
+        "https://www.stackexchange.com",
+        "https://www.aljazeera.com",
+        "https://www.reuters.com",
+        "https://www.apnews.com",
+        "https://www.buzzfeed.com",
+        "https://www.huffpost.com",
+        "https://www.techcrunch.com",
+        "https://www.engadget.com",
+        "https://www.mashable.com",
+        "https://www.vox.com",
+        "https://www.theverge.com",
+        "https://www.polygon.com",
+        "https://www.gamespot.com",
+        "https://www.ign.com",
+        "https://www.ea.com",
+        "https://www.ubisoft.com",
+        "https://www.activision.com",
+        "https://www.riotgames.com",
+        "https://www.nintendo.com",
+        "https://www.playstation.com",
+        "https://www.xbox.com",
+    };
+
+    shuffle_strings_in_place((char **)&websites, 100);
+    char **outputs;
+    size_t *lens;
+
+    puts("Downloading");
+
+    // Pretends to be Chrome by default.
+    download_websites(websites, how_many_to_download, &outputs, &lens, byte_limit, 1);
+
+    puts("Downloaded");
+
+    print_size_t_array(lens, how_many_to_download);
+
+    for (int i = 0; i < how_many_to_download; ++i)
+    {
+        printf("The webpage is %s\\n", outputs[i]);
+    }
+    
+    free_string_array(outputs, how_many_to_download);
+    free(lens);
+}
+EOF
+
+#'
+
+C_CODE2.gsub! /^.+$/ do |q|
+  q.sub(/\s+$/, "")
+end
+
+C_CODE2.gsub!(/^\s+/) do |i|
+  #	"\t" * (i.size / 4)
+  "&nbsp;" * i.size
+end
+
+formatter = Rouge::Formatters::HTML.new
+
+GLOBAL_FORMATTER = formatter
+lexer = Rouge::Lexers::C.new
+GLOBAL_LEXER = lexer
+body = formatter.format(lexer.lex(source))
+
+def to_nonbreaking(str)
+  str.gsub! "&amp;nbsp;", "&nbsp;"
+  IO.popen("micro", "w") do |q|
+    q << str
+  end if false
+  #sleep
+  q = str.gsub(/<span class="o">&amp;<\/span><span class="n">nbsp<\/span><span class="p">;(.*?)<\/span>/) do |q|
+    "&nbsp;" + $1 # "DOLLAR_ONE(#{$1})"
+  end
+
+  q.gsub! /(&nbsp;)+/ do |i|
+    count = i.size / 6
+    new_newlines = ""
+    mod = count % 4
+
+    if (mod) != 0
+      new_newlines = "<<#{count}/#{mod}>>".clear + "<br/>" * mod
+    end
+
+    new_newlines + ("&nbsp;" * (count - mod))
+  end
+
+  q.gsub!("<br/><br/>*", "<br/>&nbsp;*")
+  q.gsub!(/<br\/><br\/>(<br\/>)+/, "<br/><br/>")
+
+  q.sub! "/* Show it on screen", "&nbsp;" * 8 + "/* Show it on screen"
+  q.sub! "/* Strip the line", "&nbsp;" * 4 + "/* Strip the line"
+  q.sub! "/* Turn it into", "&nbsp;" * 8 + "/* Turn it into"
+  q.gsub! "<br/>&nbsp;* ", "<br/>&nbsp;*" + "&nbsp;" * 3
+
+  q.gsub!("{<br/><br/>", "{<br/>")
+  q
+end
+
+#require 'rouge/themes/github'
+# require 'rouge/themes/bw'
+class Theme < Rouge::CSSTheme
+  palette :black => "#1b1d1e"
+  palette :white => "#f8f8f2"
+  palette :blue => "blue"
+  palette :green => "rgb(0, 127, 0)"
+  palette :grey => "#403d3d"
+  palette :light_grey => "#465457"
+  palette :dark_blue => "#5e5d83"
+  palette :violet => "#af87ff"
+  palette :yellow => "#d7d787"
+  palette :red => "red"
+
+  style Comment,
+        Comment::Multiline,
+        Comment::Single, :fg => :dark_blue, :italic => true
+  style Comment::Preproc, :fg => :light_grey, :bold => true
+  style Comment::Special, :fg => :light_grey, :italic => true, :bold => true
+  style Error, :fg => :white, :bg => :grey
+  style Generic::Inserted, :fg => :green
+  style Generic::Deleted, :fg => :red
+  style Generic::Emph, :fg => :black, :italic => true
+  style Generic::Error,
+        Generic::Traceback, :fg => :red
+  style Generic::Heading, :fg => :grey
+  style Generic::Output, :fg => :grey
+  style Generic::Prompt, :fg => :blue
+  style Generic::Strong, :bold => true
+  style Generic::Subheading, :fg => :light_grey
+  style Keyword,
+        Keyword::Declaration, :fg => :red, :bold => true
+
+  style Keyword::Pseudo,
+        Keyword::Constant,
+        Keyword::Reserved,
+        Keyword::Type, :fg => :red, :bold => false
+  style Keyword::Namespace,
+        Operator::Word,
+        Operator, :fg => :white, :bold => true
+  style Literal::Number::Float,
+        Literal::Number::Hex,
+        Literal::Number::Integer::Long,
+        Literal::Number::Integer,
+        Literal::Number::Oct,
+        Literal::Number,
+        Literal::String::Escape, :fg => :violet
+  style Literal::String::Backtick,
+        Literal::String::Char,
+        Literal::String::Doc,
+        Literal::String::Double,
+        Literal::String::Heredoc,
+        Literal::String::Interpol,
+        Literal::String::Other,
+        Literal::String::Regex,
+        Literal::String::Single,
+        Literal::String::Symbol,
+        Literal::String, :fg => :red, :bold => true
+  style Name::Attribute, :fg => :green
+  style Name::Class,
+        Name::Decorator,
+        Name::Exception,
+        Name::Function, :fg => :white, :bold => false
+  style Name::Constant, :fg => :blue
+  style Name::Builtin::Pseudo,
+        Name::Builtin,
+        Name::Entity,
+        Name::Namespace,
+        Name::Variable::Class,
+        Name::Variable::Global,
+        Name::Variable::Instance,
+        Name::Variable,
+        Text::Whitespace, :fg => :white
+  style Name::Label, :fg => :white, :bold => true
+  style Name::Tag, :fg => :white
+  style Text, :fg => :white, :bg => :black
+end
+
+class Theme2 < Theme
+end
+
+# Get some CSS
+#css = Rouge::Themes::Base16.mode(:light).render(scope: ".highlight").to_s.gsub("\n", " ")
+
+css = Theme2.new.render().to_s.gsub("\n", " ")
+
+File.write "lib.html", "<!DOCTYPE html>
+<html>
+<head>
+<style type='text/css'>
+body { font-family: Monospace; font-size: 18px; }
+
+#{css}
+</style>
+</head>
+
+<body>
+<!--<h1>#{len} functions in library as far:</h1>
+<h1>My personal philosophy behind this is in the `Articles' folder. It is well worth the read, and it is extremely unequivocal and strong.</h1>-->
+
+<div class=highlight style='background-color: black;'>
+#{to_nonbreaking(body.gsub("\n", "<br/>"))}
+#{"\n<div style='color:white;padding-top:50px;padding-bottom:50px;font-family:Serif;'><center>And many, many more</center></div>"}
+</div>
+</body></html>"
+
+css = Theme.new.render().to_s.gsub("\n", " ")
+GLOBAL_CSS = css
+File.write "lib2.html", "<!DOCTYPE html>
+<html>
+<head>
+<style type='text/css'>
+body { font-family: Monospace; }
+
+#{css}
+</style>
+</head>
+
+<body>
+<!--<h1>#{len} functions in library as far:</h1>
+<h1>My personal philosophy behind this is in the `Articles' folder. It is well worth the read, and it is extremely unequivocal and strong.</h1>-->
+
+<div class=highlight style='background-color: black;'>
+<style type=\"text/css\">
+#{css}
+</style>
+#{to_nonbreaking(formatter.format(lexer.lex(C_CODE)).gsub("\n", "<br/>"))}
+</div>
+
+</body></html>"
+
+CSSES = []
+
+def c(alpha = false)
+  if alpha
+    "rgba(#{(0..255).to_a.sample}, #{(0..255).to_a.sample}, #{(0..255).to_a.sample}, #{rand})"
+  else
+    "rgb(#{(0..255).to_a.sample}, #{(0..255).to_a.sample}, #{(0..255).to_a.sample})"
+  end
+end
+
+500.times do
+  class Theme < Rouge::CSSTheme
+    palette :black => c
+    palette :white => c
+    palette :blue => c
+    palette :green => c
+    palette :grey => c
+    palette :light_grey => c
+    palette :dark_blue => c
+    palette :violet => c
+    palette :yellow => c
+    palette :red => c
+
+    style Comment,
+          Comment::Multiline,
+          Comment::Single, :fg => :dark_blue, :italic => true
+    style Comment::Preproc, :fg => :light_grey, :bold => true
+    style Comment::Special, :fg => :light_grey, :italic => true, :bold => true
+    style Error, :fg => :white, :bg => :grey
+    style Generic::Inserted, :fg => :green
+    style Generic::Deleted, :fg => :red
+    style Generic::Emph, :fg => :black, :italic => true
+    style Generic::Error,
+          Generic::Traceback, :fg => :red
+    style Generic::Heading, :fg => :grey
+    style Generic::Output, :fg => :grey
+    style Generic::Prompt, :fg => :blue
+    style Generic::Strong, :bold => true
+    style Generic::Subheading, :fg => :light_grey
+    style Keyword,
+          Keyword::Declaration, :fg => :red, :bold => true
+
+    style Keyword::Pseudo,
+          Keyword::Constant,
+          Keyword::Reserved,
+          Keyword::Type, :fg => :red, :bold => false
+    style Keyword::Namespace,
+          Operator::Word,
+          Operator, :fg => :white, :bold => true
+    style Literal::Number::Float,
+          Literal::Number::Hex,
+          Literal::Number::Integer::Long,
+          Literal::Number::Integer,
+          Literal::Number::Oct,
+          Literal::Number,
+          Literal::String::Escape, :fg => :violet
+    style Literal::String::Backtick,
+          Literal::String::Char,
+          Literal::String::Doc,
+          Literal::String::Double,
+          Literal::String::Heredoc,
+          Literal::String::Interpol,
+          Literal::String::Other,
+          Literal::String::Regex,
+          Literal::String::Single,
+          Literal::String::Symbol,
+          Literal::String, :fg => :red, :bold => true
+    style Name::Attribute, :fg => :green
+    style Name::Class,
+          Name::Decorator,
+          Name::Exception,
+          Name::Function, :fg => :white, :bold => false
+    style Name::Constant, :fg => :blue
+    style Name::Builtin::Pseudo,
+          Name::Builtin,
+          Name::Entity,
+          Name::Namespace,
+          Name::Variable::Class,
+          Name::Variable::Global,
+          Name::Variable::Instance,
+          Name::Variable,
+          Text::Whitespace, :fg => :white
+    style Name::Label, :fg => :white, :bold => true
+    style Name::Tag, :fg => :white
+    style Text, :fg => :white, :bg => :black
+  end
+
+  css_ = Theme.new.render().to_s.gsub("\n", " ")
+
+  CSSES.push css_
+end
+
+def make(file)
+  formatter = Rouge::Formatters::HTML.new
+  colors = "".colors
+
+  text = File.read(file).gsub(/\/\*\*.*?\*\//m, "")
+  text.gsub! /^.+$/ do |q|
+    q.sub(/\s+$/, "")
+  end
+
+  text.gsub!(/^\s+/) do |i|
+    #	"\t" * (i.size / 4)
+    "&nbsp;" * i.size
+  end
+  font = fonts = [
+    "Arial, sans-serif",
+    "Helvetica, sans-serif",
+    "Times New Roman, serif",
+    "Times, serif",
+    "Courier New, monospace",
+    "Courier, monospace",
+    "Verdana, sans-serif",
+    "Georgia, serif",
+    "Palatino, serif",
+    "Garamond, serif",
+    "Bookman, serif",
+    "Comic Sans MS, sans-serif",
+    "Trebuchet MS, sans-serif",
+    "Arial Black, sans-serif",
+    "Impact, sans-serif",
+    "Lucida Sans Unicode, sans-serif",
+    "Tahoma, sans-serif",
+    "Geneva, sans-serif",
+    "Century Gothic, sans-serif",
+    "Monaco, monospace",
+  ].sample.dump
+  bg = c
+  text = "<!DOCTYPE html>
+<html>
+<head>
+<style type='text/css'>
+body { font-family: #{font}; background-color: #{bg}; font-size: #{80 + rand * 200}%; text-shadow: #{(20..40).to_a.sample}px #{(20..40).to_a.sample}px #{(60..90).to_a.sample}px;    }
+
+#{CSSES.pop}
+
+body {
+}
+</style>
+</head>
+
+<body>
+
+
+<div class=highlight style='background-color: #{bg};'>
+<style type=\"text/css\">
+</style>
+#{to_nonbreaking(GLOBAL_FORMATTER.format(GLOBAL_LEXER.lex(text)).gsub("\n", "<br/>"))}
+</div>
+
+</body></html>"
+
+  File.write file + "_2.html", text
+end
+
+require "puppeteer-ruby"
+
+if ARGV[0] != "video"
+  outs = %w[pic.png pic2.png pic3.png]
+  puts "Puppeteer."
+  Puppeteer.launch headless: true do |browser|
+    ["lib.html", "lib2.html", "lib3.html"].map do |i|
+      i
+    end.each do |image_path|
+      puts image_path
+      begin
+        o = outs.shift
+        if File.exist? o
+          # next
+        end
+        page = browser.pages.first
+        puts "page"
+
+        if image_path == "lib2.html"
+          page.viewport = (Puppeteer::Viewport.new(width: 1080, height: 1420))
+        else
+          page.viewport = (Puppeteer::Viewport.new(width: 1080, height: 1920))
+        end
+        puts "page.viewport"
+
+        path = "file:///#{File.expand_path(image_path)}"
+        puts "goto until domcontent"
+        begin
+          th = Thread.new do |i|
+            sleep 10
+            exec File.expand_path(__FILE__)
+          end
+          page.goto(path, wait_until: "domcontentloaded", timeout: 15000)
+
+          begin
+            th.kill
+          rescue Exception
+          end
+        rescue Exception
+          puts "Error retry"
+          sleep 3
+          retry
+        end
+        puts "goto until domcontent done"
+        puts "wait body"
+
+        page.wait_for_selector "body"
+        puts "wait body done"
+
+        puts "wait screenshot now!!"
+        fp = image_path != "./lib2.html"
+        puts "FP? #{image_path}" + fp.to_s
+        page.screenshot(path: o, omit_background: true, full_page: fp)
+        puts "SS done."
+        #gets
+      end
+    rescue Exception => e
+      puts "Error #{e.to_s[0..]}"
+    end
+
+    puts "Done"
+  end
+end
+
+if ARGV.first == "video"
+  puts "video"
+  begin
+    Dir.chdir "imgs"
+  rescue Exception
+  end
+
+  Dir.glob("*.html").each do |i|
+    if i.match /_/
+    else
+      make i
+      puts "Made for #{i}"
+    end
+  end
+
+  puts "Puppeteer2."
+  Puppeteer.launch headless: true do |browser|
+    Dir.glob("*_2.html").sort.map do |i|
+      i
+    end.each_with_index do |image_path, ind|
+      ind += 1
+      puts image_path
+      begin
+        o = "pic%s.png" % ind
+        if File.exist? o
+          next
+        end
+        page = browser.pages.first
+        puts "page"
+        page.viewport = (Puppeteer::Viewport.new(width: 1080, height: 1920))
+        puts "page.viewport"
+
+        path = "file:///#{File.expand_path(image_path)}"
+        puts "goto until domcontent"
+        begin
+          th = Thread.new do |i|
+            sleep 10
+            Dir.chdir ".."
+            exec File.expand_path(__FILE__) + "  video"
+          end
+
+          page.goto(path, wait_until: "domcontentloaded", timeout: 15000)
+
+          begin
+            th.kill
+          rescue Exception
+          end
+        rescue Exception
+          puts "Error retry"
+          sleep 3
+          retry
+        end
+        puts "goto until domcontent done"
+        puts "wait body"
+
+        page.wait_for_selector "body"
+        puts "wait body done"
+
+        puts "wait screenshot now!!"
+        page.screenshot(path: o, omit_background: true, full_page: false)
+        puts "SS done #{o}.".green
+        #gets
+      end
+    rescue Exception => e
+      puts "Error #{e.to_s[0..]}"
+    end
+
+    puts "Done"
+  end
+end

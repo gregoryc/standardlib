@@ -1,0 +1,444 @@
+#!/usr/bin/ruby
+# Public domain also.
+
+USE_CONVERT = true
+
+# frozen_string_literal: false
+begin_time = Time.new
+
+RESIZED_NAME = "resized#{Process.pid}_#{Time.new.to_s.gsub(" ", "_")}_#{rand * 10000000}"
+
+at_exit do
+  puts "%s seconds." % diff = (Time.new - begin_time)
+  File.write "#{__FILE__}_times", "#{diff}\n", mode: "a"
+  system "rm -r -f #{RESIZED_NAME}"
+end
+
+THREADS = " "
+#system "sudo renice -n -20 #{Process.pid}"
+$num_fr = -1
+
+def next_fr()
+  n = $num_fr += 1
+  "fr_#{n.to_s.rjust(8, "0")}.png"
+end
+
+$num = [-1]
+
+#at_exit do
+#$procs.each do |i|
+#Process.wait i
+#end
+#end
+
+def next_()
+  $num[0] += 1
+  "frame_#{$num.first.to_s.rjust(8, "0")}.png"
+end
+
+require "mini_magick"
+
+NUM_FRAMES=10
+
+#$threads = []
+$instance = 0
+
+def interpolate_frames(frame_a, frame_b, num_frames = NUM_FRAMES)
+  #if $instance == 3
+  #		system "google-chrome ./frame_*"
+  #end
+  $instance += 1
+  $procs = []
+  #$threads.push Thread.new do |i|
+  #	if File.read(frame_a) == File.read(frame_b)
+  #		10.times {
+  #		FileUtils.cp frame_a, next_
+  #		}
+  #		return
+  #	end
+  total = [0]
+  until total[0] == NUM_FRAMES
+    total = [0]
+    (1..num_frames).each do |frame_num|
+      nfr = next_fr
+      puts "<<#{frame_a} => #{frame_b}>> (#{frame_num}) #{nfr}"
+
+      $procs << (Thread.new([total, frame_num, frame_a, frame_b, nfr]) do |t_data|
+        total, frame_num, frame_a, frame_b, nfr = t_data
+        puts "THREAD #{nfr}"
+        frame_a_image = MiniMagick::Image.open(frame_a)
+        frame_b_image = MiniMagick::Image.open(frame_b)
+
+        fraction = frame_num.to_f / num_frames
+        interpolated_frame = frame_a_image.composite(frame_b_image) do |c|
+          c.interlace("Plane")
+          c.compose "Over"
+          c.gravity "center"
+          c.geometry "#{frame_a_image.width}x#{frame_a_image.height}"
+          c.alpha "On"
+          puts blend = "#{(fraction * 100).to_i}x#{((1 - fraction) * 100).to_i}"
+          c.blend(blend)
+        end
+
+        interpolated_frame.write(nfr)
+
+        total[0] += 1
+      end)
+    end
+
+    $procs.each do |i|
+      i.join
+    end
+  end
+
+  puts "WAITED FOR ALL".green
+  nil
+end
+
+def filter(a)
+  a = a.each_line.map do |i| i.strip end.select do |i|
+    i.split.size > 1
+  end.join("\n")
+
+  #	abort a
+end
+
+def make_text_post(post, out_file)
+  return
+  File.unlink out_file rescue nil
+  pl = filter(post.gsub('"', "")).gsub(/\n+/, "\n")[0..300] #[0..300]
+
+  cmd = "con" "vert #{THREADS} -size #{width = 1080}x#{height = 1920} xc:none -fill black -font DejaVu-Sans -pointsize 40 -gravity center -size #{width - 100}x#{height - 100} " \
+  "           caption:\"#{pl}\"      -bordercolor \"#FFFFFF\" -border        20x20               #{out_file};"
+
+  #'
+
+  puts cmd
+
+  puts pl.size
+  #        puts cmd
+  system cmd, exception: true
+
+  glob = File.dirname(out_file) + "/*-0"
+  Dir.glob(glob).each do |i|
+    File.unlink i
+  end
+end
+
+require "shellwords"
+require "fileutils"
+
+# Generates a video from command line arguments.
+require "optparse"
+
+def generate_generative_video_with_audio(
+  output_file,
+  duration_seconds,
+  width,
+  height,
+  audio_file,
+  image_directory,
+  frame_rate,
+  start_time_seconds,
+  text_post_folder,
+  shuffle,
+  shuffle_all_images,
+  images_repeat_times, height_adjustment_pixels, width_adjustment_pixels
+)
+  if frame_rate != 30
+    #    abort "TOO SLOW FRAME RATE #{frame_rate}"
+  end
+  frame_rate = frame_rate.to_i
+  width = width.to_i
+  height = height.to_i
+  duration_seconds = duration_seconds.to_i
+  start_time_seconds = start_time_seconds.to_i
+  total_frames = (duration_seconds * frame_rate).to_i
+  images_repeat_times = images_repeat_times.to_i
+  height_adjustment_pixels = height_adjustment_pixels.to_i
+  width_adjustment_pixels = width_adjustment_pixels.to_i
+
+  folder = if text_post_folder != ""
+      text_post_folder
+    else
+      image_directory
+    end
+
+
+  # Calculate the frame duration based on the number of images
+  frame_duration = duration_seconds / (glob_ = Dir.glob(File.join(folder, "*")).size.to_f)
+  raise "Folder doesnt exist #{Dir.pwd} #{folder} #{File.join(folder, "*")}" if glob_ == 0.0
+
+  puts "Image duration is #{duration_seconds} / #{glob_} = #{frame_duration} per image."
+  puts "Fps is #{frame_rate}"
+  if File.exist? RESIZED_NAME
+  else
+    FileUtils.mkdir_p(RESIZED_NAME)
+    if text_post_folder != ""
+      puts "text mode"
+      posts = []
+      text_mode = true
+      unless File.exist?(text_post_folder)
+        puts "Folder doesn't exist #{text_post_folder}"
+        exit! 1
+      end
+      Dir.glob(text_post_folder + "/*").sort.each do |text_post|
+        posts << File.read(text_post)
+      end
+      require "shellwords"
+      posts.each_with_index do |post, index|
+        out_file = "#{RESIZED_NAME}/#{index}.png"
+        text = post
+        puts Dir.pwd
+
+        cmd = <<~CMD
+          convert #{THREADS} -size #{width}x#{height} xc:none -fill black -font DejaVu-Sans -pointsize 40 -gravity center -size #{width - 100}x#{height - 100}            caption:"#{post.gsub('"', "")}"      -bordercolor "#FFFFFF" -border        20x20                           #{RESIZED_NAME}/centered_text#{index};
+        CMD
+
+        puts cmd
+
+        system cmd, exception: true
+      end
+
+      system "rm -f #{RESIZED_NAME}/*-0"
+
+      #    system "google-chrome                        #{RESIZED_NAME}/*; "
+      #    puts "Hi"
+    else
+      puts "non text mode"
+      text_mode = false
+
+      sorted_ = Dir.glob(image_directory + "/*").sort
+
+      # raise image_directory + "/*" if sorted_.size != 7
+
+      sorted_.each do |img|
+        img = File.basename(img)
+        (new_file = ("#{RESIZED_NAME}/" + img.gsub(/\)|\(| /, "_"))+'.png')
+        old_file = "\"#{image_directory}/#{img}\""
+        #        raise sorted_.inspect unless old_file.match(/(\.png|\.jpg)$/)
+        if USE_CONVERT
+          ncmd = "convert #{THREADS} #{old_file} -resize #{width - width_adjustment_pixels}x#{height - height_adjustment_pixels}^ -gravity center -filter Lanczos -quality 100 -extent #{width}x#{height} #{new_file}"
+        else
+          ncmd = "cp #{old_file} #{new_file}"
+        end
+        require "colored"
+        puts Dir.pwd
+        puts ncmd.to_s
+
+        system ncmd, exception: true
+
+        if false
+          raise unless File.exist?(image_directory)
+          raise unless File.exist?(new_file)
+
+          size_a, size_b = `identify #{new_file}`.scan(/\d+x\d+/m)[0].split("x")
+          size_a = size_a.to_i
+          size_b = size_b.to_i
+
+          if size_a != width
+            #      	raise "Width error #{size_a} #{width}"
+          end
+          if size_b != height
+            #     	raise "Height error #{size_b} #{height}"
+          end
+        end
+      end
+    end
+  end
+
+  imgs = Dir.glob(RESIZED_NAME + "/*").sort.to_a * images_repeat_times
+  imgs.shuffle! if shuffle == "y"
+
+  puts "#{imgs.size} images #{imgs}"
+
+  if imgs.size < 2
+    begin
+      "too few images"
+      exit! 1
+    end
+  end
+  #  sleep 3000
+
+  #  threads = []
+  old_image_file = nil
+
+  # Generate frames with changing colors in the bottom half
+  (1..total_frames).each do |frame_num|
+    #red = (Math.sin(frame_num * 0.1) * 127 + 128).to_i
+    #green = (Math.cos(frame_num * 0.1) * 127 + 128).to_i
+    #blue = (Math.sin(frame_num * 0.05) * 127 + 128).to_i
+
+    #    xc = "'xc:rgb(#{red},#{green},#{blue})'"
+
+    #    convert_command = "convert -size #{width}x#{height} #{"'xc:white'"} #{frame_file = next_}" #, exception: true
+    #    puts convert_command
+
+    #    system convert_command, exception: true
+
+    # Calculate the image index based on frame duration
+
+    # 1/5 to 5/5 for example, result between 0 and 1
+    fraction_in = ((frame_num.to_f) / total_frames)
+
+    # if 50 images, between 0 and 50
+    orig_fraction_in = fraction_in *= imgs.size
+    fraction_in = fraction_in.floor
+
+    # Get the image file to overlay based on the image index
+
+    if shuffle_all_images == "y"
+      puts "SHUFFLE ALL IMAGES"
+      image_file = imgs.sample
+    else
+      image_file = imgs[fraction_in]
+      next_image = imgs[fraction_in + 1]
+      image_file = imgs.last if image_file.nil?
+      next_image = imgs.last if next_image.nil?
+    end
+    puts "#{frame_num} / #{total_frames} #{image_file} #{orig_fraction_in}"
+
+    require "colored"
+
+    frame_file = next_
+
+    if old_image_file == image_file # && false
+      puts "Copy skip #{old_image_file} to a new one"
+      FileUtils.cp old_image_file, frame_file
+    else
+      # Overlay the image onto the frame
+
+      #      <<EOF
+      #     convert #{image_file} #{next_image} -gravity center -geometry "#{width}x#{height}" -compose over -define compose:args=50,50 \
+      #    -alpha on -interpolate plane -clut       -set filename: "%t" "$output_folder/frame_${frame_num}_%8d.png"
+      #EOF
+      FileUtils.cp image_file, frame_file
+    end
+
+    old_image_file = image_file
+  end
+
+  def ffmpeg_make_video_no_audio(duration_seconds, output_file, frame_rate)
+    # Create the video from generated frames using FFmpeg
+
+    frames = Dir.glob("frame_*").sort.to_a
+
+    unless (size = Dir.glob("fr_*").size).nonzero?
+      #	raise size.to_s if size % 10 != 0
+      frames.each_with_index do |a, index|
+        interpolate_frames(a, frames[1 + index] || frames.last)
+        #exit
+      end
+    end
+
+    #    raise unless frame_rate == 1
+    lst = [Dir.glob("fr_*").size.to_f, (frame_rate.to_f * NUM_FRAMES * duration_seconds)]
+
+    #	raise lst.to_s unless lst[0]==lst[1]
+    #	raise size.to_s if size % 10 != 0
+
+    video_cmd = "ffmpeg -framerate #{NUM_FRAMES * frame_rate} -i fr_%08d.png -c:v libx264 -pix_fmt yuv420p -t #{duration_seconds} -y merged_video.mp4"
+
+    #    puts Dir.glob("fr_*.png").size
+    #   abort
+
+    video_cmd
+
+    #    abort frames.inspect
+  end
+
+  video_cmd = ffmpeg_make_video_no_audio duration_seconds, output_file, frame_rate
+
+	puts "Command"
+  puts video_cmd
+
+  system(video_cmd, exception: true)
+
+  def ffmpeg_make_video_with_audio(start_time_seconds, audio_file, output_file, duration_seconds,        frame_rate); x = duration_seconds
+    puts "FFMPEG start time #{start_time_seconds}"
+    merge_cmd = "ffmpeg -ss #{start_time_seconds} -i #{audio_file.shellescape} -t #{x} -i #{"merged_video.mp4".shellescape} -filter_complex \"[0:a]atrim=end=#{duration_seconds},asetpts=PTS-STARTPTS[a];[1:v]fps=#{30},trim=0:#{x},setpts=PTS-STARTPTS[v]\" -map \"[v]\" -map \"[a]\" #{output_file.shellescape} -loglevel quiet"   end
+
+  merge_cmd = ffmpeg_make_video_with_audio(
+    start_time_seconds,
+    audio_file,
+    output_file,
+    duration_seconds,frame_rate
+  )
+
+  puts merge_cmd
+
+  system merge_cmd, exception: true
+
+  # Clean up temporary frames
+  Dir.glob("frame_*").each { |f|
+ #    f = File.basename f; File.rename(f, folder + "_frames/" + f)
+    }
+  # Clean up intermediate video
+  #  File.delete(output_file)
+
+  #  system "google-chrome #{output_file} &"
+end
+
+options = {}
+
+ARGV.empty? && begin
+  ARGV.push "-h"
+end
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename(__FILE__)} [options] outputfile duration-seconds width height song-to-play image-folder fps\nFor phone content, set the width to 1080x1920, and you can have a pulsating banner on top or side or both.\n\n\n"
+
+  opts.on("-t", "--text-post-folder FOLDER", "Optional text post folder for text posts. Folder should contain text files.") do |text_post_folder|
+    options[:text_post_folder] = text_post_folder
+  end
+  opts.on("-s", "--start-time SECONDS", "Start time in seconds for audio") do |start_time|
+    options[:start_time] = start_time
+  end
+  opts.on("-e", "--shuffle (y/n)", "Frame shuffle (not recommended).") do |mode|
+    options[:shuffle] = mode
+  end
+  opts.on("-f", "--shuffle-all-images (y/n)", "Shuffle the new files in resize directory (y or n, default n)") do |mode|
+    options[:shuffle_all_images] = mode
+  end
+  opts.on("-r", "--images-repeat-times N", "Number of times to repeat the image set [1, 2, 3] => [1, 2, 3] * N") do |mode|
+    options[:repeat_times] = mode
+  end
+  opts.on("--height-adjustment-pixels px", "Amount of pixels to have pulsate on top.") do |mode|
+    options[:height_adjustment_pixels] = mode
+  end
+  opts.on("--width-adjustment-pixels px", "Amount of pixels to have pulsate on sides.") do |mode|
+    options[:width_adjustment_pixels] = mode
+  end
+  opts.on("-h", "--help", "Amount of pixels to have pulsate on sides.") do
+    puts opts
+    exit! 0
+  end
+end.parse!
+
+options[:start_time] ||= 0 # Default start time is 0 seconds
+options[:text_post_folder] ||= "" # Default start time is 0 seconds
+options[:shuffle] ||= "n" # Default start time is 0 seconds
+options[:shuffle_all_images] ||= "n" # Default start time is 0 seconds
+options[:repeat_times] ||= "1" # Default start time is 0 seconds
+options[:height_adjustment_pixels] ||= "0" # Default start time is 0 seconds
+options[:width_adjustment_pixels] ||= "0" # Default start time is 0 seconds
+
+puts ARGV.inspect
+
+if false
+  glob = File.basename(ARGV[5].gsub(/\/\.\.$/, "")) + "_.txt"
+  raise "%s isn't a file (%s)" % [glob, ARGV[5]] unless (File.exist? glob)
+  glob = "Test\n\n" + (File.read glob)
+  make_text_post(glob, ARGV[5] + "/" + "2_1")
+end
+
+begin
+  generate_generative_video_with_audio(
+    *ARGV,
+      options[:start_time], options[:text_post_folder], options[:shuffle], options[:shuffle_all_images], options[:repeat_times],
+    options[:height_adjustment_pixels],
+    options[:width_adjustment_pixels],
+  )
+ensure
+  puts Dir.pwd
+end

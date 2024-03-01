@@ -1,0 +1,1047 @@
+Allocation works.
+"Line one"
+"Line two line two"
+"Line 3"
+""
+Original: "   Hello, world!   "
+Stripped: "Hello, world!"
+Split into 3 tokens:
+1: "apple"
+2: "orange"
+3: "banana"
+Joined: "apple,orange,banana"
+len 33 on iter 0
+foo
+len 303 on iter 1
+sssssssssssssssssssssssssssssa
+len 73 on iter 2
+dasdasd
+len 23 on iter 3
+fe
+len 53 on iter 4
+feeee
+len 63 on iter 5
+aaaaaa
+len 83 on iter 6
+feeeeeee
+len 103 on iter 7
+ffeeeeeeee
+len 133 on iter 8
+sssssssssssss
+len 13 on iter 9
+m
+len 3 on iter 10
+
+Size 10000
+test 3
+Count 1
+Count 2
+Array:  World
+Total Length: 6
+Original command: echo Hello, world!
+Escaped command: echo\ Hello,\ world!
+Unsafe Input: Hello, world!'; rm -rf / # ( && | > <
+Escaped Output: Hello,\ world!\'\;\ rm\ -rf\ /\ #\ \(\ \&\&\ \|\ \>\ \<
+
+Original string: reverse
+Reversed string: esrever
+
+Does the string start with "This"? Yes
+Does the string end with "text"? Yes
+FOR
+Original sentence: The quick brown fox jumps over the lazy dog.
+Sentence after replacement: The quick brown cat jumps over the lazy dog.
+
+Occurrences of "wood" in the text: 4
+count_occurrences_of_substr_len("Foobar", 6, "o", 1) == 2 ? 
+Pass substr len assert 1.
+Pass substr len assert 2.
+Pass substr len assert 3.
+Pass substr len assert 4.
+String: "The quick brown fox jumps over the lazy dog."
+Index of first occurrence of 'o': 12
+Index of last occurrence of 'o': 41
+Is "Hello" alphabetic? Yes
+Is "Hello123" alphabetic? Yes
+
+Is "12345" numeric? Yes
+Is "123abc" numeric? No
+
+Is "Hello123" alphanumeric? Yes
+Is "Hello_123" alphanumeric? No
+Longest common prefix: "ap"
+
+Longest common suffix: ""
+
+Integer: 3232
+String representation: "3232"
+
+Integer: -1234567
+String representation: "-1234567"
+String: "3.14"
+Converted to double: 3.140000
+
+String: "The quick brown fox jumps over the lazy dog."
+Index of first vowel: 2
+Index of last vowel: 41
+Joined string: "apple,orange,banana,grape"
+
+Original string: "Reverse me!"
+Reversed in place: "!em esreveR"
+Is "12345" a valid integer? Yes
+Is "12abc" a valid integer? No
+Common prefix of "apple" and "appetizer": "app"
+
+Common suffix of "grape" and "ripe": "pe"
+
+Original sentence: "the quick brown fox"
+Title case sentence: "The Quick Brown Fox"
+Maximum value in the array: 78
+
+Minimum value in the array: 12
+
+Sum of elements in the array: 75
+
+Original array: 1 2 3 4 5 
+Reversed array: 5 4 3 2 1 
+Is the array sorted in ascending order? Yes
+
+Is the array sorted in descending order? Yes
+Array: [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+
+Generated Range: [1, 3, 5, 7, 9]
+
+Original Array: 5 2 9 1 5 6 
+Sorted Array: 1 2 5 5 6 9 Converted string to integer: 121212
+Content written to 'ex_ample.txt':
+Hello, File I/O!
+
+Content read from 'ex_ample.txt':
+'Hello, File I/O!'
+Does file 'existing_file.txt' exist? Yes
+Does file 'non_existing_file.txt' exist? No
+
+Content appended to 'existing_file.txt':
+
+This line is appended!
+Size of file 'ex_ample.txt': 16 bytes
+
+File 'file_to_remove.txt' created.
+Source file 'source_file.txt' created.
+Files matching pattern '*.c' in directory '.' (length is 2):
+decoupled_thorough_tests.c
+lib_and_tests.c
+Concatenated String 1: 'Hello, world!'
+Concatenated String 2: 'Hello, world! How are you?'
+Mapped Int Result: 1 2 3 4 5 Reduced Result: 15
+Filtered Result: [2, 4]
+2
+4
+6
+8
+10
+246810Reduced Result: 15
+Filtered Result: 2 4 12
+14
+16
+18
+20
+22
+24
+26
+28
+30
+
+
+
+List Comprehension Result (1-15 inclusive) x2 if greater than 5: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
+
+Equal in size
+15
+
+[1, 3, 5]
+3
+Reject Result: 1 3 5 
+Select Result: 2 4 
+Replicated Integer Array: [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+Replicated Character Array: abcabcabcabcabcMaximum Value: 9
+Minimum Value: 1
+Sum of Elements: 44
+Average of Elements: 4.00
+Before Uniq like in ruby (as opposed to bash):
+apple banana apple orange banana kiwi 
+After Uniq like in ruby (as opposed to bash):
+apple banana orange kiwi 
+Before Uniq bash:
+apple banana apple orange banana kiwi 
+After Uniq bash
+apple banana apple orange banana kiwi 
+test 48
+The value for 'banana' is: 0000000000000000
+The value for 'banana' is: is curved.
+The value for 'apple' is: is red or green
+test 48. Printing dict keys in dict of size 6 {6 => 6}
+[man, frog, banana, apple, cat, dog]
+Printing dict values
+0. walks
+1. ribbits
+2. is curved.
+3. is red or green
+4. is cute
+5. barks a lot
+To a
+{man: 00000000004188BF, frog: 00000000004188B2, banana: 000000000041887F, apple: 000000000041888A, cat: 000000000041889A, dog: 00000000004188A2}
+{man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
+Adding 1000
+dict_destructor(my_dict)
+dict_destructor(my_dict) done.
+new frozen dict
+new frozen dict made
+The value for 'banana' is: dog
+The value for 'apple' is: cat
+Frozendict size is 2
+test 49
+The value for 'banana' is: 0
+Set | The value for 'banana' is: 1
+Printing set keys
+[man, frog, banana, apple, cat, dog]
+To a
+{man, frog, banana, apple, cat, dog}
+Frozenset | The value for 'banana' is: 1
+Frozenset | The value for 'apple' is: 1
+Frozenset | Frozenset size is 3
+Test 50 - randomness.
+banana
+banana
+apple
+apple
+date
+apple
+banana
+cherry
+elderberry
+banana
+Test 52
+3 size set should be. 3 <=> 3.
+Adding an additional 20,000 members to the set
+0
+8000
+16000
+20003 <=> 20003, 1.
+Del 1000 value pre.
+Del 1000 value post.
+20002
+set add new_value post 20003
+set add new_value post 20003
+set add new_value post 20003
+set add new_value post 20003
+After 50,000 insertions. Set size should be 20004 <=> 20004
+test 52 | set destructor
+Set destroyed
+ test52
+0 of 10,000 (size 13)
+1000 of 10,000 (size 13)
+2000 of 10,000 (size 13)
+3000 of 10,000 (size 13)
+4000 of 10,000 (size 13)
+5000 of 10,000 (size 13)
+6000 of 10,000 (size 13)
+7000 of 10,000 (size 13)
+8000 of 10,000 (size 13)
+9000 of 10,000 (size 13)
+Adding an additional 20,000 members to the dict
+0
+2500
+5000
+7500
+10000
+12500
+15000
+17500
+Added 20,000 elements
+Size of dictionary is 20001. It should be 20001
+Adding the same value 60,000 times, which is PRESENT in dictionary.
+Added 'foo' 60,000 times.
+Size of dictionary is 20001. It should be 20001
+Deleting keys 60,000 times and adding and deleting random keys.
+0
+15000
+30000
+45000
+dict_destructor(dict)
+dict destroyed test52
+Reading words file into array.
+/usr/share/dict/words is 104335 lines and we can efficiently play around with it in a more easy fashion than Python.
+Shuffling words
+Randomly chosen word is "Melody". Randomly chosen word is "Gray's". Randomly chosen word is "lewdest". Randomly chosen word is "bridge's". Randomly chosen word is "Kwangju". Randomly chosen word is "howlers". Randomly chosen word is "database". Randomly chosen word is "tweet's". Randomly chosen word is "did". Randomly chosen word is "traveller's". Randomly chosen word is "harmless". Randomly chosen word is "hunter's". Randomly chosen word is "Tanisha's". Randomly chosen word is "destructive". Randomly chosen word is "homestead". Randomly chosen word is "oddity's". Randomly chosen word is "cockily". Randomly chosen word is "egalitarianism". Randomly chosen word is "stingily". Randomly chosen word is "harmonicas". Randomly chosen word is "squeaky". Randomly chosen word is "segregating". Randomly chosen word is "voltage's". Randomly chosen word is "pining". Randomly chosen word is "sanding". Randomly chosen word is "businessman's". Randomly chosen word is "deportation's". Randomly chosen word is "shoplifting's". Randomly chosen word is "financier". Randomly chosen word is "continuation". Randomly chosen word is "remarkably". Randomly chosen word is "blockchains". Randomly chosen word is "opiate". Randomly chosen word is "Bowers". Randomly chosen word is "chaperones". Randomly chosen word is "sorter's". Randomly chosen word is "callipering". Randomly chosen word is "ageing's". Randomly chosen word is "holdovers". Randomly chosen word is "Mexican's". Randomly chosen word is "dislike". Randomly chosen word is "tertiary". Randomly chosen word is "monolith's". Randomly chosen word is "reverse". Randomly chosen word is "prod's". Randomly chosen word is "intern". Randomly chosen word is "compact's". Randomly chosen word is "concatenating". Randomly chosen word is "pendulous". Randomly chosen word is "ventured". Randomly chosen word is "folk". Randomly chosen word is "Los". Randomly chosen word is "inspiration's". Randomly chosen word is "deerskin". Randomly chosen word is "disillusionment's". Randomly chosen word is "autoworkers". Randomly chosen word is "Sun". Randomly chosen word is "headwaters's". Randomly chosen word is "cannoned". Randomly chosen word is "tamarind". Randomly chosen word is "toss's". Randomly chosen word is "Chan's". Randomly chosen word is "sojourning". Randomly chosen word is "camcorders". Randomly chosen word is "dimension". Randomly chosen word is "diadem's". Randomly chosen word is "Reuther". Randomly chosen word is "ventures". Randomly chosen word is "Coventry's". Randomly chosen word is "respirator". Randomly chosen word is "plumper". Randomly chosen word is "circlet's". Randomly chosen word is "tarnished". Randomly chosen word is "redefinition". Randomly chosen word is "primate's". Randomly chosen word is "constitutional's". Randomly chosen word is "tamped". Randomly chosen word is "dribbling". Randomly chosen word is "lunches". Randomly chosen word is "mistakenly". Randomly chosen word is "unbars". Randomly chosen word is "Toby's". Randomly chosen word is "London's". Randomly chosen word is "grandparents". Randomly chosen word is "Buber". Randomly chosen word is "telemetry". Randomly chosen word is "Bantu's". Randomly chosen word is "archbishop". Randomly chosen word is "caption's". Randomly chosen word is "vernal". Randomly chosen word is "oxygenation". Randomly chosen word is "wimp's". Randomly chosen word is "amnesty's". Randomly chosen word is "river's". 
+Test 54.
+Test 1 passes.
+Test 2 passes.
+Test 3 passes.
+Test new 1
+Original: foo example foo
+Replaced: [foo, Dog] example [Replacement #2]
+Test new 2
+Hello world
+Cat Hello, world! Hello, universe!
+FOR
+FOR
+Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
+FOR
+FOR
+Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
+1000 iterations
+Cat Hello, world! Hello, universe!
+read_files_into_array(files, 5, &words_data, &lens, 1)
+[985084, 985084, 985084, 985084, 985084]
+
+
+Words file 0 is 985084
+Words file 1 is 985084
+Words file 2 is 985084
+Words file 3 is 985084
+Words file 4 is 985084
+All tests pass.
+Test 1
+First element
+First element is good.
+Alloc size is 8
+i = 50000, size [49999 => 491556]
+i = 100000, size [99999 => 1106016]
+i = 150000, size [149999 => 1659036]
+i = 200000, size [199999 => 1659036]
+i = 250000, size [249999 => 2488560]
+i = 300000, size [299999 => 2488560]
+i = 350000, size [349999 => 3732852]
+i = 400000, size [399999 => 3732852]
+i = 450000, size [449999 => 3732852]
+i = 500000, size [499999 => 5599284]
+i = 550000, size [549999 => 5599284]
+i = 600000, size [599999 => 5599284]
+i = 650000, size [649999 => 5599284]
+i = 700000, size [699999 => 8398932]
+i = 750000, size [749999 => 8398932]
+i = 800000, size [799999 => 8398932]
+i = 850000, size [849999 => 8398932]
+i = 900000, size [899999 => 8398932]
+i = 950000, size [949999 => 8398932]
+i = 1000000, size [999999 => 8398932]
+All tests passed!
+==8291== Memcheck, a memory error detector
+==8291== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==8291== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==8291== Command: ./lib_and_tests
+==8291== 
+Allocation works.
+"Line one"
+"Line two line two"
+"Line 3"
+""
+Original: "   Hello, world!   "
+Stripped: "Hello, world!"
+Split into 3 tokens:
+1: "apple"
+2: "orange"
+3: "banana"
+Joined: "apple,orange,banana"
+len 33 on iter 0
+foo
+len 303 on iter 1
+sssssssssssssssssssssssssssssa
+len 73 on iter 2
+dasdasd
+len 23 on iter 3
+fe
+len 53 on iter 4
+feeee
+len 63 on iter 5
+aaaaaa
+len 83 on iter 6
+feeeeeee
+len 103 on iter 7
+ffeeeeeeee
+len 133 on iter 8
+sssssssssssss
+len 13 on iter 9
+m
+len 3 on iter 10
+
+Size 10000
+test 3
+Count 1
+Count 2
+Array:  World
+Total Length: 6
+Original command: echo Hello, world!
+Escaped command: echo\ Hello,\ world!
+Unsafe Input: Hello, world!'; rm -rf / # ( && | > <
+Escaped Output: Hello,\ world!\'\;\ rm\ -rf\ /\ #\ \(\ \&\&\ \|\ \>\ \<
+
+Original string: reverse
+Reversed string: esrever
+
+Does the string start with "This"? Yes
+Does the string end with "text"? Yes
+FOR
+Original sentence: The quick brown fox jumps over the lazy dog.
+Sentence after replacement: The quick brown cat jumps over the lazy dog.
+
+Occurrences of "wood" in the text: 4
+count_occurrences_of_substr_len("Foobar", 6, "o", 1) == 2 ? 
+Pass substr len assert 1.
+Pass substr len assert 2.
+Pass substr len assert 3.
+Pass substr len assert 4.
+String: "The quick brown fox jumps over the lazy dog."
+Index of first occurrence of 'o': 12
+Index of last occurrence of 'o': 41
+Is "Hello" alphabetic? Yes
+Is "Hello123" alphabetic? Yes
+
+Is "12345" numeric? Yes
+Is "123abc" numeric? No
+
+Is "Hello123" alphanumeric? Yes
+Is "Hello_123" alphanumeric? No
+Longest common prefix: "ap"
+
+Longest common suffix: ""
+
+Integer: 3232
+String representation: "3232"
+
+Integer: -1234567
+String representation: "-1234567"
+String: "3.14"
+Converted to double: 3.140000
+
+String: "The quick brown fox jumps over the lazy dog."
+Index of first vowel: 2
+Index of last vowel: 41
+Joined string: "apple,orange,banana,grape"
+
+Original string: "Reverse me!"
+Reversed in place: "!em esreveR"
+Is "12345" a valid integer? Yes
+Is "12abc" a valid integer? No
+Common prefix of "apple" and "appetizer": "app"
+
+Common suffix of "grape" and "ripe": "pe"
+
+Original sentence: "the quick brown fox"
+Title case sentence: "The Quick Brown Fox"
+Maximum value in the array: 78
+
+Minimum value in the array: 12
+
+Sum of elements in the array: 75
+
+Original array: 1 2 3 4 5 
+Reversed array: 5 4 3 2 1 
+Is the array sorted in ascending order? Yes
+
+Is the array sorted in descending order? Yes
+Array: [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+
+Generated Range: [1, 3, 5, 7, 9]
+
+Original Array: 5 2 9 1 5 6 
+Sorted Array: 1 2 5 5 6 9 Converted string to integer: 121212
+Content written to 'ex_ample.txt':
+Hello, File I/O!
+
+Content read from 'ex_ample.txt':
+'Hello, File I/O!'
+Does file 'existing_file.txt' exist? Yes
+Does file 'non_existing_file.txt' exist? No
+
+Content appended to 'existing_file.txt':
+
+This line is appended!
+Size of file 'ex_ample.txt': 16 bytes
+
+File 'file_to_remove.txt' created.
+Source file 'source_file.txt' created.
+Files matching pattern '*.c' in directory '.' (length is 2):
+lib_and_tests.c
+decoupled_thorough_tests.c
+Concatenated String 1: 'Hello, world!'
+Concatenated String 2: 'Hello, world! How are you?'
+Mapped Int Result: 1 2 3 4 5 Reduced Result: 15
+Filtered Result: [2, 4]
+2
+4
+6
+8
+10
+246810Reduced Result: 15
+Filtered Result: 2 4 12
+14
+16
+18
+20
+22
+24
+26
+28
+30
+
+
+
+List Comprehension Result (1-15 inclusive) x2 if greater than 5: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
+
+Equal in size
+15
+
+MULTITHREAD
+18
+20
+22
+24
+26
+28
+30
+12
+14
+16
+MULTITHREAD DONE
+List Comprehension Result (on 4 threads) (1-15 inclusive) x2 if greater than 5: 
+[1, 3, 5]
+3
+Reject Result: 1 3 5 
+Select Result: 2 4 
+Replicated Integer Array: [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+Replicated Character Array: abcabcabcabcabcMaximum Value: 9
+Minimum Value: 1
+Sum of Elements: 44
+Average of Elements: 4.00
+Before Uniq like in ruby (as opposed to bash):
+apple banana apple orange banana kiwi 
+After Uniq like in ruby (as opposed to bash):
+apple banana orange kiwi 
+Before Uniq bash:
+apple banana apple orange banana kiwi 
+After Uniq bash
+apple banana apple orange banana kiwi 
+test 48
+The value for 'banana' is: (nil)
+The value for 'banana' is: is curved.
+The value for 'apple' is: is red or green
+test 48. Printing dict keys in dict of size 6 {6 => 6}
+[man, frog, banana, apple, cat, dog]
+Printing dict values
+0. walks
+1. ribbits
+2. is curved.
+3. is red or green
+4. is cute
+5. barks a lot
+To a
+{man: 0x11cdaf, frog: 0x11cda2, banana: 0x11cd6f, apple: 0x11cd7a, cat: 0x11cd8a, dog: 0x11cd92}
+{man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
+Adding 1000
+dict_destructor(my_dict)
+dict_destructor(my_dict) done.
+new frozen dict
+new frozen dict made
+The value for 'banana' is: dog
+The value for 'apple' is: cat
+Frozendict size is 2
+test 49
+The value for 'banana' is: 0
+Set | The value for 'banana' is: 1
+Printing set keys
+[man, frog, banana, apple, cat, dog]
+To a
+{man, frog, banana, apple, cat, dog}
+Frozenset | The value for 'banana' is: 1
+Frozenset | The value for 'apple' is: 1
+Frozenset | Frozenset size is 3
+Test 50 - randomness.
+cherry
+banana
+banana
+date
+date
+date
+cherry
+apple
+apple
+date
+Test 52
+3 size set should be. 3 <=> 3.
+Adding an additional 20,000 members to the set
+0
+8000
+16000
+20003 <=> 20003, 1.
+Del 1000 value pre.
+Del 1000 value post.
+20002
+set add new_value post 20003
+set add new_value post 20003
+set add new_value post 20003
+set add new_value post 20003
+After 50,000 insertions. Set size should be 20004 <=> 20004
+test 52 | set destructor
+Set destroyed
+ test52
+0 of 10,000 (size 13)
+1000 of 10,000 (size 13)
+2000 of 10,000 (size 13)
+3000 of 10,000 (size 13)
+4000 of 10,000 (size 13)
+5000 of 10,000 (size 13)
+6000 of 10,000 (size 13)
+7000 of 10,000 (size 13)
+8000 of 10,000 (size 13)
+9000 of 10,000 (size 13)
+Adding an additional 20,000 members to the dict
+0
+2500
+5000
+7500
+10000
+12500
+15000
+17500
+Added 20,000 elements
+Size of dictionary is 20001. It should be 20001
+Adding the same value 60,000 times, which is PRESENT in dictionary.
+Added 'foo' 60,000 times.
+Size of dictionary is 20001. It should be 20001
+Deleting keys 60,000 times and adding and deleting random keys.
+0
+15000
+30000
+45000
+dict_destructor(dict)
+dict destroyed test52
+/tmp
+
+Getting input works (popen) works - output is '/tmp' on UNIX.
+Reading words file into array.
+/usr/share/dict/words is 104335 lines and we can efficiently play around with it in a more easy fashion than Python.
+Shuffling words
+Randomly chosen word is "come". Randomly chosen word is "PDQ". Randomly chosen word is "periphrases". Randomly chosen word is "fatalistic". Randomly chosen word is "emulating". Randomly chosen word is "mania's". Randomly chosen word is "inquirer". Randomly chosen word is "dreamlike". Randomly chosen word is "housemothers". Randomly chosen word is "bouncer's". Randomly chosen word is "Chernomyrdin's". Randomly chosen word is "Barnaby". Randomly chosen word is "Mesopotamia". Randomly chosen word is "hangouts". Randomly chosen word is "beg". Randomly chosen word is "dampness". Randomly chosen word is "unfairer". Randomly chosen word is "platitudinous". Randomly chosen word is "copula". Randomly chosen word is "BITNET". Randomly chosen word is "pungently". Randomly chosen word is "cadaver's". Randomly chosen word is "currency". Randomly chosen word is "romanticism". Randomly chosen word is "burro". Randomly chosen word is "elucidation". Randomly chosen word is "meanwhile's". Randomly chosen word is "revilement". Randomly chosen word is "charwoman's". Randomly chosen word is "prettying". Randomly chosen word is "enquiring". Randomly chosen word is "villain's". Randomly chosen word is "tangy". Randomly chosen word is "desecrates". Randomly chosen word is "staterooms". Randomly chosen word is "abalones". Randomly chosen word is "grouper". Randomly chosen word is "hovels". Randomly chosen word is "vim". Randomly chosen word is "saddened". Randomly chosen word is "elevates". Randomly chosen word is "motormouth". Randomly chosen word is "toleration's". Randomly chosen word is "blamer". Randomly chosen word is "froths". Randomly chosen word is "townsmen". Randomly chosen word is "sixes". Randomly chosen word is "windscreens". Randomly chosen word is "recessional". Randomly chosen word is "cantankerous". Randomly chosen word is "offer's". Randomly chosen word is "paisleys". Randomly chosen word is "prejudgment". Randomly chosen word is "potsherd's". Randomly chosen word is "Anderson". Randomly chosen word is "wigeon's". Randomly chosen word is "assurance". Randomly chosen word is "sunscreens". Randomly chosen word is "rack's". Randomly chosen word is "calamity's". Randomly chosen word is "lyre". Randomly chosen word is "Sakha's". Randomly chosen word is "incoherence's". Randomly chosen word is "Ono's". Randomly chosen word is "slatterns". 
+Test 54.
+Test 1 passes.
+Test 2 passes.
+Test 3 passes.
+Test new 1
+Original: foo example foo
+Replaced: [foo, Dog] example [Replacement #2]
+Test new 2
+Hello world
+Cat Hello, world! Hello, universe!
+FOR
+FOR
+Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
+FOR
+FOR
+Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
+1000 iterations
+Cat Hello, world! Hello, universe!
+read_files_into_array(files, 5, &words_data, &lens, 1)
+[985084, 985084, 985084, 985084, 985084]
+
+
+Words file 0 is 985084
+Words file 1 is 985084
+Words file 2 is 985084
+Words file 3 is 985084
+Words file 4 is 985084
+All tests pass.
+==8291== 
+==8291== HEAP SUMMARY:
+==8291==     in use at exit: 0 bytes in 0 blocks
+==8291==   total heap usage: 787,211 allocs, 787,211 frees, 22,320,193 bytes allocated
+==8291== 
+==8291== All heap blocks were freed -- no leaks are possible
+==8291== 
+==8291== For lists of detected and suppressed errors, rerun with: -s
+==8291== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==8311== Memcheck, a memory error detector
+==8311== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==8311== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==8311== Command: ./decoupled_thorough_tests
+==8311== 
+Test 1
+First element
+First element is good.
+Alloc size is 8
+i = 50000, size [49999 => 491556]
+i = 100000, size [99999 => 1106016]
+i = 150000, size [149999 => 1659036]
+i = 200000, size [199999 => 1659036]
+i = 250000, size [249999 => 2488560]
+i = 300000, size [299999 => 2488560]
+i = 350000, size [349999 => 3732852]
+i = 400000, size [399999 => 3732852]
+i = 450000, size [449999 => 3732852]
+i = 500000, size [499999 => 5599284]
+i = 550000, size [549999 => 5599284]
+i = 600000, size [599999 => 5599284]
+i = 650000, size [649999 => 5599284]
+i = 700000, size [699999 => 8398932]
+i = 750000, size [749999 => 8398932]
+i = 800000, size [799999 => 8398932]
+i = 850000, size [849999 => 8398932]
+i = 900000, size [899999 => 8398932]
+i = 950000, size [949999 => 8398932]
+i = 1000000, size [999999 => 8398932]
+All tests passed!
+==8311== 
+==8311== HEAP SUMMARY:
+==8311==     in use at exit: 0 bytes in 0 blocks
+==8311==   total heap usage: 33 allocs, 33 frees, 25,200,324 bytes allocated
+==8311== 
+==8311== All heap blocks were freed -- no leaks are possible
+==8311== 
+==8311== For lists of detected and suppressed errors, rerun with: -s
+==8311== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Allocation works.
+"Line one"
+"Line two line two"
+"Line 3"
+""
+Original: "   Hello, world!   "
+Stripped: "Hello, world!"
+Split into 3 tokens:
+1: "apple"
+2: "orange"
+3: "banana"
+Joined: "apple,orange,banana"
+len 33 on iter 0
+foo
+len 303 on iter 1
+sssssssssssssssssssssssssssssa
+len 73 on iter 2
+dasdasd
+len 23 on iter 3
+fe
+len 53 on iter 4
+feeee
+len 63 on iter 5
+aaaaaa
+len 83 on iter 6
+feeeeeee
+len 103 on iter 7
+ffeeeeeeee
+len 133 on iter 8
+sssssssssssss
+len 13 on iter 9
+m
+len 3 on iter 10
+
+Size 10000
+test 3
+Count 1
+Count 2
+Array:  World
+Total Length: 6
+Original command: echo Hello, world!
+Escaped command: echo\ Hello,\ world!
+Unsafe Input: Hello, world!'; rm -rf / # ( && | > <
+Escaped Output: Hello,\ world!\'\;\ rm\ -rf\ /\ #\ \(\ \&\&\ \|\ \>\ \<
+
+Original string: reverse
+Reversed string: esrever
+
+Does the string start with "This"? Yes
+Does the string end with "text"? Yes
+FOR
+Original sentence: The quick brown fox jumps over the lazy dog.
+Sentence after replacement: The quick brown cat jumps over the lazy dog.
+
+Occurrences of "wood" in the text: 4
+count_occurrences_of_substr_len("Foobar", 6, "o", 1) == 2 ? 
+Pass substr len assert 1.
+Pass substr len assert 2.
+Pass substr len assert 3.
+Pass substr len assert 4.
+String: "The quick brown fox jumps over the lazy dog."
+Index of first occurrence of 'o': 12
+Index of last occurrence of 'o': 41
+Is "Hello" alphabetic? Yes
+Is "Hello123" alphabetic? Yes
+
+Is "12345" numeric? Yes
+Is "123abc" numeric? No
+
+Is "Hello123" alphanumeric? Yes
+Is "Hello_123" alphanumeric? No
+Longest common prefix: "ap"
+
+Longest common suffix: ""
+
+Integer: 3232
+String representation: "3232"
+
+Integer: -1234567
+String representation: "-1234567"
+String: "3.14"
+Converted to double: 3.140000
+
+String: "The quick brown fox jumps over the lazy dog."
+Index of first vowel: 2
+Index of last vowel: 41
+Joined string: "apple,orange,banana,grape"
+
+Original string: "Reverse me!"
+Reversed in place: "!em esreveR"
+Is "12345" a valid integer? Yes
+Is "12abc" a valid integer? No
+Common prefix of "apple" and "appetizer": "app"
+
+Common suffix of "grape" and "ripe": "pe"
+
+Original sentence: "the quick brown fox"
+Title case sentence: "The Quick Brown Fox"
+Maximum value in the array: 78
+
+Minimum value in the array: 12
+
+Sum of elements in the array: 75
+
+Original array: 1 2 3 4 5 
+Reversed array: 5 4 3 2 1 
+Is the array sorted in ascending order? Yes
+
+Is the array sorted in descending order? Yes
+Array: [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+
+Generated Range: [1, 3, 5, 7, 9]
+
+Original Array: 5 2 9 1 5 6 
+Sorted Array: 1 2 5 5 6 9 Converted string to integer: 121212
+Content written to 'ex_ample.txt':
+Hello, File I/O!
+
+Content read from 'ex_ample.txt':
+'Hello, File I/O!'
+Does file 'existing_file.txt' exist? Yes
+Does file 'non_existing_file.txt' exist? No
+
+Content appended to 'existing_file.txt':
+
+This line is appended!
+Size of file 'ex_ample.txt': 16 bytes
+
+File 'file_to_remove.txt' created.
+Source file 'source_file.txt' created.
+Files matching pattern '*.c' in directory '.' (length is 2):
+lib_and_tests.c
+decoupled_thorough_tests.c
+Concatenated String 1: 'Hello, world!'
+Concatenated String 2: 'Hello, world! How are you?'
+Mapped Int Result: 1 2 3 4 5 Reduced Result: 15
+Filtered Result: [2, 4]
+2
+4
+6
+8
+10
+246810Reduced Result: 15
+Filtered Result: 2 4 12
+14
+16
+18
+20
+22
+24
+26
+28
+30
+
+
+
+List Comprehension Result (1-15 inclusive) x2 if greater than 5: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
+
+Equal in size
+15
+
+MULTITHREAD
+18
+20
+22
+24
+12
+14
+16
+26
+28
+30
+MULTITHREAD DONE
+List Comprehension Result (on 4 threads) (1-15 inclusive) x2 if greater than 5: 
+[1, 3, 5]
+3
+Reject Result: 1 3 5 
+Select Result: 2 4 
+Replicated Integer Array: [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+Replicated Character Array: abcabcabcabcabcMaximum Value: 9
+Minimum Value: 1
+Sum of Elements: 44
+Average of Elements: 4.00
+Before Uniq like in ruby (as opposed to bash):
+apple banana apple orange banana kiwi 
+After Uniq like in ruby (as opposed to bash):
+apple banana orange kiwi 
+Before Uniq bash:
+apple banana apple orange banana kiwi 
+After Uniq bash
+apple banana apple orange banana kiwi 
+test 48
+The value for 'banana' is: (nil)
+The value for 'banana' is: is curved.
+The value for 'apple' is: is red or green
+test 48. Printing dict keys in dict of size 6 {6 => 6}
+[man, frog, banana, apple, cat, dog]
+Printing dict values
+0. walks
+1. ribbits
+2. is curved.
+3. is red or green
+4. is cute
+5. barks a lot
+To a
+{man: 0x565f5d13, frog: 0x565f5d06, banana: 0x565f5cd3, apple: 0x565f5cde, cat: 0x565f5cee, dog: 0x565f5cf6}
+{man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
+Adding 1000
+dict_destructor(my_dict)
+dict_destructor(my_dict) done.
+new frozen dict
+new frozen dict made
+The value for 'banana' is: dog
+The value for 'apple' is: cat
+Frozendict size is 2
+test 49
+The value for 'banana' is: 0
+Set | The value for 'banana' is: 1
+Printing set keys
+[man, frog, banana, apple, cat, dog]
+To a
+{man, frog, banana, apple, cat, dog}
+Frozenset | The value for 'banana' is: 1
+Frozenset | The value for 'apple' is: 1
+Frozenset | Frozenset size is 3
+Test 50 - randomness.
+cherry
+banana
+banana
+date
+date
+date
+cherry
+apple
+apple
+date
+Test 52
+3 size set should be. 3 <=> 3.
+Adding an additional 20,000 members to the set
+0
+8000
+16000
+20003 <=> 20003, 1.
+Del 1000 value pre.
+Del 1000 value post.
+20002
+set add new_value post 20003
+set add new_value post 20003
+set add new_value post 20003
+set add new_value post 20003
+After 50,000 insertions. Set size should be 20004 <=> 20004
+test 52 | set destructor
+Set destroyed
+ test52
+0 of 10,000 (size 13)
+1000 of 10,000 (size 13)
+2000 of 10,000 (size 13)
+3000 of 10,000 (size 13)
+4000 of 10,000 (size 13)
+5000 of 10,000 (size 13)
+6000 of 10,000 (size 13)
+7000 of 10,000 (size 13)
+8000 of 10,000 (size 13)
+9000 of 10,000 (size 13)
+Adding an additional 20,000 members to the dict
+0
+2500
+5000
+7500
+10000
+12500
+15000
+17500
+Added 20,000 elements
+Size of dictionary is 20001. It should be 20001
+Adding the same value 60,000 times, which is PRESENT in dictionary.
+Added 'foo' 60,000 times.
+Size of dictionary is 20001. It should be 20001
+Deleting keys 60,000 times and adding and deleting random keys.
+0
+15000
+30000
+45000
+dict_destructor(dict)
+dict destroyed test52
+/tmp
+
+Getting input works (popen) works - output is '/tmp' on UNIX.
+Reading words file into array.
+/usr/share/dict/words is 104335 lines and we can efficiently play around with it in a more easy fashion than Python.
+Shuffling words
+Randomly chosen word is "come". Randomly chosen word is "PDQ". Randomly chosen word is "periphrases". Randomly chosen word is "fatalistic". Randomly chosen word is "emulating". Randomly chosen word is "mania's". Randomly chosen word is "inquirer". Randomly chosen word is "dreamlike". Randomly chosen word is "housemothers". Randomly chosen word is "bouncer's". Randomly chosen word is "Chernomyrdin's". Randomly chosen word is "Barnaby". Randomly chosen word is "Mesopotamia". Randomly chosen word is "hangouts". Randomly chosen word is "beg". Randomly chosen word is "dampness". Randomly chosen word is "unfairer". Randomly chosen word is "platitudinous". Randomly chosen word is "copula". Randomly chosen word is "BITNET". Randomly chosen word is "pungently". Randomly chosen word is "cadaver's". Randomly chosen word is "currency". Randomly chosen word is "romanticism". Randomly chosen word is "burro". Randomly chosen word is "elucidation". Randomly chosen word is "meanwhile's". Randomly chosen word is "revilement". Randomly chosen word is "charwoman's". Randomly chosen word is "prettying". Randomly chosen word is "enquiring". Randomly chosen word is "villain's". Randomly chosen word is "tangy". Randomly chosen word is "desecrates". Randomly chosen word is "staterooms". Randomly chosen word is "abalones". Randomly chosen word is "grouper". Randomly chosen word is "hovels". Randomly chosen word is "vim". Randomly chosen word is "saddened". Randomly chosen word is "elevates". Randomly chosen word is "motormouth". Randomly chosen word is "toleration's". Randomly chosen word is "blamer". Randomly chosen word is "froths". Randomly chosen word is "townsmen". Randomly chosen word is "sixes". Randomly chosen word is "windscreens". Randomly chosen word is "recessional". Randomly chosen word is "cantankerous". Randomly chosen word is "offer's". Randomly chosen word is "paisleys". Randomly chosen word is "prejudgment". Randomly chosen word is "potsherd's". Randomly chosen word is "Anderson". Randomly chosen word is "wigeon's". Randomly chosen word is "assurance". Randomly chosen word is "sunscreens". Randomly chosen word is "rack's". Randomly chosen word is "calamity's". Randomly chosen word is "lyre". Randomly chosen word is "Sakha's". Randomly chosen word is "incoherence's". Randomly chosen word is "Ono's". Randomly chosen word is "slatterns". 
+Test 54.
+Test 1 passes.
+Test 2 passes.
+Test 3 passes.
+Test new 1
+Original: foo example foo
+Replaced: [foo, Dog] example [Replacement #2]
+Test new 2
+Hello world
+Cat Hello, world! Hello, universe!
+FOR
+FOR
+Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
+FOR
+FOR
+Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
+1000 iterations
+Cat Hello, world! Hello, universe!
+read_files_into_array(files, 5, &words_data, &lens, 1)
+[985084, 985084, 985084, 985084, 985084]
+
+
+Words file 0 is 985084
+Words file 1 is 985084
+Words file 2 is 985084
+Words file 3 is 985084
+Words file 4 is 985084
+All tests pass.
+Test 1
+First element
+First element is good.
+Alloc size is 8
+i = 50000, size [49999 => 491556]
+i = 100000, size [99999 => 1106016]
+i = 150000, size [149999 => 1659036]
+i = 200000, size [199999 => 1659036]
+i = 250000, size [249999 => 2488560]
+i = 300000, size [299999 => 2488560]
+i = 350000, size [349999 => 3732852]
+i = 400000, size [399999 => 3732852]
+i = 450000, size [449999 => 3732852]
+i = 500000, size [499999 => 5599284]
+i = 550000, size [549999 => 5599284]
+i = 600000, size [599999 => 5599284]
+i = 650000, size [649999 => 5599284]
+i = 700000, size [699999 => 8398932]
+i = 750000, size [749999 => 8398932]
+i = 800000, size [799999 => 8398932]
+i = 850000, size [849999 => 8398932]
+i = 900000, size [899999 => 8398932]
+i = 950000, size [949999 => 8398932]
+i = 1000000, size [999999 => 8398932]
+All tests passed!

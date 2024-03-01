@@ -1,0 +1,167 @@
+#!/usr/bin/env ruby
+# Generated from transpile_slow_scripting_into_c.rb
+#
+# Allows for easy transpilation from slow languages that hinder people's
+# lives in many ways (scriping languages) into machine-efficient code that
+# actually runs the same operations without wasting CPU power, electricity,
+# money, time, user's (programmer's) programmatic interactivity (ability to
+# quickly run and recompile near-instantly) or people's attention, and is
+# somewhat ideal.
+# 
+# You can easily (manually, or with AI) transpile this code now into code
+# that actually runs fast - and actually compiles quickly (C++, Crystal
+# and Rust can't do this and are awful at it, especially the latter two -
+# Zig maybe is good); is safe; has good error handling; and performs the
+# intended operations, with ease.
+# 
+
+if ARGV.size != 3    # Transpile length() or size() with | 
+#                         1. strlen()
+#                      or 2. int get_file_size(const char *filename, size_t *size)
+#                      or 3. size_t dict_size(struct Dict *dict)
+#                      or 4. size_t frozen_dict_size(struct FrozenDict *dict)
+#                      or 5. size_t frozen_set_size(struct FrozenSet *set)
+#                      or 6. size_t set_size(struct Set *set)
+#                      as appropriate.
+  warn "Generate custom \`foundationallib' library (github.com/gregoryc/foundationallib) with a given prefix to make it customized and to avoid any possibility whatsoever of namespace collisons."
+  puts
+  warn "Usage #{__FILE__} <origin_header_file> <prefix (e.g., \"l\", \"g\", [your company name], etc.> <custom_header_output_file>"
+  exit 1
+end
+f = File.read(ARGV[0])    # Transpile File.read() with |  char *read_file_into_string(const char *filename, size_t *size)  as appropriate.
+PREFIX = ARGV[1]
+PREFIX2 = ARGV[1] + "_FOUNDATIONAL_LIB_"
+OUTPUT_FILE = ARGV[2]
+
+l = 0
+funcs = []
+f.each_line do |i|
+  l += 1
+  while true
+    if i.start_with? "FOUNDATIONAL_LIB_FUNC"    # Transpile start_with?() with |   as appropriate.    # Transpile start_with() with |   as appropriate.
+      i.split.each do |q|    # Transpile split() with |  char **split(const char *str, size_t *output_size, const char *delim, size_t max_times, int keep_delim_in_result)  as appropriate.
+        if q.include? "("
+          i = i.split("{")[0]    # Transpile split() with |  char **split(const char *str, size_t *output_size, const char *delim, size_t max_times, int keep_delim_in_result)  as appropriate.
+          raise i if i.include? "{"
+          funcs << [i, q.split("(", 2)[0].gsub("*", "")]    # Transpile gsub() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.    # Transpile split() with |  char **split(const char *str, size_t *output_size, const char *delim, size_t max_times, int keep_delim_in_result)  as appropriate.
+          break
+        end
+      end
+    end
+    break
+  end
+end
+dups = (funcs.map do |i|    # Transpile map() with | 
+#                         1. void map(void *array, size_t size, size_t elem_size, void (*transform)(void *))
+#                      or 2. void map_ints(int *array, size_t size, int (*transform)(int))
+#                      as appropriate.
+  i[1]
+end.to_a)
+
+dups.each do |i|
+  if dups.count(i) > 1    # Transpile count() with | 
+#                         1. char *replace_count(const char *source, const char *find, const char *replace, const size_t matches_max)
+#                      or 2. size_t count_occurrences_of_adjacent_data_in_array(const void *array_of_adjacent_values, size_t array_length, const void *memory, size_t memory_length)
+#                      or 3. size_t count_occurrences_of_data_in_array(const void **array_of_pointers, size_t array_length, const void *memory, size_t memory_length)
+#                      or 4. size_t count_occurrences_of_string_in_array(const char **array, const char *string, size_t array_length)
+#                      or 5. size_t count_occurrences_of_substr(const char *str, const char *substring)
+#                      or 6. size_t count_occurrences_of_substr_len(const char *string, size_t string_length, const char *substring, size_t substring_length)
+#                      as appropriate.
+    puts "Dup " + i
+  end
+end
+
+dups.uniq!    # Transpile uniq() with |  int string_array_uniq(const char **array, size_t size, char ***output, size_t *output_size)  as appropriate.
+
+dups.each do |i|
+  puts i
+
+  [" ", "*", ")", "("].each do |init|
+    f.gsub!(init + i + "(") do |i|    # Transpile gsub!() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.
+      new = init + (PREFIX + i[1..-2]) + "("
+    end
+
+    f.gsub!(init + i + ")") do |i|    # Transpile gsub!() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.
+      new = init + (PREFIX + i[1..-2]) + ")"
+    end
+
+    f.gsub!(init + i + ",", " " + PREFIX + i + ",") do |i|    # Transpile gsub!() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.
+      new = init + (PREFIX + i[1..-2]) + ","
+    end
+  end
+end
+
+%w[DictKeyValue SetKey FrozenDict Dict FrozenSet Set].each do |i|
+  f.gsub! " " + i, " " + PREFIX + i    # Transpile gsub!() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.
+  f.gsub! PREFIX + PREFIX, PREFIX    # Transpile gsub!() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.
+end
+
+
+macros = []
+
+f.each_line do |line|
+	line = line[0..-1]
+
+  if line.start_with? "#define"    # Transpile start_with?() with |   as appropriate.    # Transpile start_with() with |   as appropriate.
+    line = line["#define ".size..-1]    # Transpile length() or size() with | 
+#                         1. strlen()
+#                      or 2. int get_file_size(const char *filename, size_t *size)
+#                      or 3. size_t dict_size(struct Dict *dict)
+#                      or 4. size_t frozen_dict_size(struct FrozenDict *dict)
+#                      or 5. size_t frozen_set_size(struct FrozenSet *set)
+#                      or 6. size_t set_size(struct Set *set)
+#                      as appropriate.
+    if line.size > 1 && line[-1] == "\\"    # Transpile length() or size() with | 
+#                         1. strlen()
+#                      or 2. int get_file_size(const char *filename, size_t *size)
+#                      or 3. size_t dict_size(struct Dict *dict)
+#                      or 4. size_t frozen_dict_size(struct FrozenDict *dict)
+#                      or 5. size_t frozen_set_size(struct FrozenSet *set)
+#                      or 6. size_t set_size(struct Set *set)
+#                      as appropriate.
+      line = line[0..-2]
+    end
+
+    line = line.split(" ", 2)[0]    # Transpile split() with |  char **split(const char *str, size_t *output_size, const char *delim, size_t max_times, int keep_delim_in_result)  as appropriate.
+    line = line.split("(", 2)[0]    # Transpile split() with |  char **split(const char *str, size_t *output_size, const char *delim, size_t max_times, int keep_delim_in_result)  as appropriate.
+
+    macros << line
+  end
+end
+macros.delete "_CRT_RAND_S"    # Transpile delete() with | 
+#                         1. void dict_del_key(struct Dict *dict, const char *key)
+#                      or 2. void set_del_key(struct Set *set, const char *key)
+#                      as appropriate.
+puts macros
+macros.each do |macro|
+  f.gsub! macro, PREFIX + macro    # Transpile gsub!() with | 
+#                         1. char *replace_all(const char *source, const char *find, const char *replace)
+#                      or 2. char *replace_all_with_callback(const char *str, const char *old_substring, char *(*callback)(const char *, void *), void *data_for_callback)
+#                      or 3. int replace_all_with_lens(const char *source, size_t source_len, const char *find, size_t find_len, const char *replace, size_t replace_len, char **output, size_t *new_len, int *should_free_after_use, size_t matches_max, size_t *num_matches)
+#                      as appropriate.
+end
+File.write OUTPUT_FILE, f

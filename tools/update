@@ -1,0 +1,44 @@
+#!/bin/bash
+set -x
+set -e
+
+cd ../tools/..
+for file in `find -name '*.c'`
+do
+clang-format -style="{BasedOnStyle: LLVM, IndentWidth: 4, UseTab: Never, IndentCaseLabels: true, ColumnLimit: 500, BreakBeforeBraces: Allman}" -i "$file"
+done
+
+cd ./tools
+
+if test "$1" = "fast"; then
+	cond=true
+	echo Fast
+else
+	echo Checking
+	./run_lib 2>&1 | grep -q 'ERROR SUMMARY: 0 errors from 0 contexts'
+fi
+
+if [ $? -eq 0 ]; then
+	./documentation_generate
+	./make_image_of_docs
+	cd ../tests
+	./run_test_suite.sh
+	cd ../tools
+	ruby lynx.rb
+	cd ..
+	./GENERATE_CUSTOM_FOUNDATIONALLIB.rb foundationallib.h MY_COMPANY_ custom_library_example.h
+
+	cd platforms/header_and_separate_compilation_unit
+
+	make clean || true
+	make
+
+	./non_inline_example
+
+	exit 0
+else
+	echo Failed to run
+	exit 1
+fi
+
+exit 1
