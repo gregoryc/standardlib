@@ -4180,7 +4180,7 @@ FOUNDATIONAL_LIB_WARN_UNUSED_RESULT FOUNDATIONAL_LIB_NONNULL FOUNDATIONAL_LIB_NO
     for (size_t i = 0; i < input_len; ++i)
     {
         // Escape special characters
-        if (input[i] == ' ' || input[i] == '\t' || input[i] == '\n' || input[i] == '*' || input[i] == '?' || input[i] == '\'' || input[i] == '"' || input[i] == '\\' || input[i] == '$' || input[i] == '`' || input[i] == '(' || input[i] == ')' || input[i] == '&' || input[i] == ';' || input[i] == '|' || input[i] == '>' || input[i] == '<')
+        if (!isalpha(input[i]) && !isdigit(input[i]))
         {
             escaped[j++] = '\\';
         }

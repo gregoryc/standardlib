@@ -4462,7 +4462,7 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC char *MY_COMPANY_shellescape(const char *input)
     for (size_t i = 0; i < input_len; ++i)
     {
         // Escape special characters
-        if (input[i] == ' ' || input[i] == '\t' || input[i] == '\n' || input[i] == '*' || input[i] == '?' || input[i] == '\'' || input[i] == '"' || input[i] == '\\' || input[i] == '$' || input[i] == '`' || input[i] == '(' || input[i] == ')' || input[i] == '&' || input[i] == ';' || input[i] == '|' || input[i] == '>' || input[i] == '<')
+        if (!isalpha(input[i]) && !isdigit(input[i]))
         {
             escaped[j++] = '\\';
         }

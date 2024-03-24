@@ -39,9 +39,9 @@ Count 2
 Array:  World
 Total Length: 6
 Original command: echo Hello, world!
-Escaped command: echo\ Hello,\ world!
+Escaped command: echo\ Hello\,\ world\!
 Unsafe Input: Hello, world!'; rm -rf / # ( && | > <
-Escaped Output: Hello,\ world!\'\;\ rm\ -rf\ /\ #\ \(\ \&\&\ \|\ \>\ \<
+Escaped Output: Hello\,\ world\!\'\;\ rm\ \-rf\ \/\ \#\ \(\ \&\&\ \|\ \>\ \<
 
 Original string: reverse
 Reversed string: esrever
@@ -211,15 +211,15 @@ Frozenset | The value for 'banana' is: 1
 Frozenset | The value for 'apple' is: 1
 Frozenset | Frozenset size is 3
 Test 50 - randomness.
-banana
-banana
-apple
-apple
 date
+banana
+elderberry
 apple
+elderberry
 banana
 cherry
-elderberry
+apple
+date
 banana
 Test 52
 3 size set should be. 3 <=> 3.
@@ -273,7 +273,7 @@ dict destroyed test52
 Reading words file into array.
 /usr/share/dict/words is 104335 lines and we can efficiently play around with it in a more easy fashion than Python.
 Shuffling words
-Randomly chosen word is "Melody". Randomly chosen word is "Gray's". Randomly chosen word is "lewdest". Randomly chosen word is "bridge's". Randomly chosen word is "Kwangju". Randomly chosen word is "howlers". Randomly chosen word is "database". Randomly chosen word is "tweet's". Randomly chosen word is "did". Randomly chosen word is "traveller's". Randomly chosen word is "harmless". Randomly chosen word is "hunter's". Randomly chosen word is "Tanisha's". Randomly chosen word is "destructive". Randomly chosen word is "homestead". Randomly chosen word is "oddity's". Randomly chosen word is "cockily". Randomly chosen word is "egalitarianism". Randomly chosen word is "stingily". Randomly chosen word is "harmonicas". Randomly chosen word is "squeaky". Randomly chosen word is "segregating". Randomly chosen word is "voltage's". Randomly chosen word is "pining". Randomly chosen word is "sanding". Randomly chosen word is "businessman's". Randomly chosen word is "deportation's". Randomly chosen word is "shoplifting's". Randomly chosen word is "financier". Randomly chosen word is "continuation". Randomly chosen word is "remarkably". Randomly chosen word is "blockchains". Randomly chosen word is "opiate". Randomly chosen word is "Bowers". Randomly chosen word is "chaperones". Randomly chosen word is "sorter's". Randomly chosen word is "callipering". Randomly chosen word is "ageing's". Randomly chosen word is "holdovers". Randomly chosen word is "Mexican's". Randomly chosen word is "dislike". Randomly chosen word is "tertiary". Randomly chosen word is "monolith's". Randomly chosen word is "reverse". Randomly chosen word is "prod's". Randomly chosen word is "intern". Randomly chosen word is "compact's". Randomly chosen word is "concatenating". Randomly chosen word is "pendulous". Randomly chosen word is "ventured". Randomly chosen word is "folk". Randomly chosen word is "Los". Randomly chosen word is "inspiration's". Randomly chosen word is "deerskin". Randomly chosen word is "disillusionment's". Randomly chosen word is "autoworkers". Randomly chosen word is "Sun". Randomly chosen word is "headwaters's". Randomly chosen word is "cannoned". Randomly chosen word is "tamarind". Randomly chosen word is "toss's". Randomly chosen word is "Chan's". Randomly chosen word is "sojourning". Randomly chosen word is "camcorders". Randomly chosen word is "dimension". Randomly chosen word is "diadem's". Randomly chosen word is "Reuther". Randomly chosen word is "ventures". Randomly chosen word is "Coventry's". Randomly chosen word is "respirator". Randomly chosen word is "plumper". Randomly chosen word is "circlet's". Randomly chosen word is "tarnished". Randomly chosen word is "redefinition". Randomly chosen word is "primate's". Randomly chosen word is "constitutional's". Randomly chosen word is "tamped". Randomly chosen word is "dribbling". Randomly chosen word is "lunches". Randomly chosen word is "mistakenly". Randomly chosen word is "unbars". Randomly chosen word is "Toby's". Randomly chosen word is "London's". Randomly chosen word is "grandparents". Randomly chosen word is "Buber". Randomly chosen word is "telemetry". Randomly chosen word is "Bantu's". Randomly chosen word is "archbishop". Randomly chosen word is "caption's". Randomly chosen word is "vernal". Randomly chosen word is "oxygenation". Randomly chosen word is "wimp's". Randomly chosen word is "amnesty's". Randomly chosen word is "river's". 
+Randomly chosen word is "apostasy's". Randomly chosen word is "outpatients". Randomly chosen word is "emetic's". Randomly chosen word is "oho". Randomly chosen word is "helpful". Randomly chosen word is "Kabul". Randomly chosen word is "ivy's". Randomly chosen word is "underclass's". Randomly chosen word is "crucially". Randomly chosen word is "gazers". Randomly chosen word is "pyrotechnics's". Randomly chosen word is "Flory's". Randomly chosen word is "chalked". Randomly chosen word is "MacBride". Randomly chosen word is "social's". Randomly chosen word is "whirligig's". Randomly chosen word is "twirled". Randomly chosen word is "roominess's". Randomly chosen word is "teetotaler". Randomly chosen word is "armistice's". Randomly chosen word is "proffered". Randomly chosen word is "Maine". Randomly chosen word is "harness". Randomly chosen word is "hymning". Randomly chosen word is "celesta". Randomly chosen word is "ever". Randomly chosen word is "redesigns". Randomly chosen word is "convinced". Randomly chosen word is "unbelief's". Randomly chosen word is "analyzer's". Randomly chosen word is "lion's". Randomly chosen word is "dead". Randomly chosen word is "disclaimer's". Randomly chosen word is "jays". Randomly chosen word is "intellectualized". Randomly chosen word is "Darth". Randomly chosen word is "cuttlefish's". Randomly chosen word is "attaching". Randomly chosen word is "fascination's". Randomly chosen word is "dreadful". Randomly chosen word is "stuns". Randomly chosen word is "console". Randomly chosen word is "unmodified". Randomly chosen word is "Reaganomics's". Randomly chosen word is "padlock's". Randomly chosen word is "tendon". Randomly chosen word is "infusion's". Randomly chosen word is "infielder's". Randomly chosen word is "Merthiolate". Randomly chosen word is "nab". Randomly chosen word is "jay". Randomly chosen word is "buyer's". Randomly chosen word is "Rayleigh's". Randomly chosen word is "Candide". Randomly chosen word is "socialization's". Randomly chosen word is "wear". Randomly chosen word is "Actaeon". Randomly chosen word is "cruddy". Randomly chosen word is "shiftiness". Randomly chosen word is "printouts". Randomly chosen word is "Dixon". Randomly chosen word is "fruit's". Randomly chosen word is "Dawn". Randomly chosen word is "delectable". Randomly chosen word is "sup". Randomly chosen word is "assiduous". Randomly chosen word is "Chasity". Randomly chosen word is "Vladivostok". Randomly chosen word is "dialect's". Randomly chosen word is "cheeses". Randomly chosen word is "tickle". Randomly chosen word is "Sherri's". Randomly chosen word is "pureness's". Randomly chosen word is "brusquely". Randomly chosen word is "rapaciously". Randomly chosen word is "hat's". Randomly chosen word is "rededicated". Randomly chosen word is "p". Randomly chosen word is "sarcomas". Randomly chosen word is "bitchy". Randomly chosen word is "leukemia". Randomly chosen word is "lame's". Randomly chosen word is "Peoria's". Randomly chosen word is "nonabsorbents". 
 Test 54.
 Test 1 passes.
 Test 2 passes.
@@ -327,11 +327,11 @@ i = 900000, size [899999 => 8398932]
 i = 950000, size [949999 => 8398932]
 i = 1000000, size [999999 => 8398932]
 All tests passed!
-==8291== Memcheck, a memory error detector
-==8291== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==8291== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==8291== Command: ./lib_and_tests
-==8291== 
+==4590== Memcheck, a memory error detector
+==4590== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4590== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4590== Command: ./lib_and_tests
+==4590== 
 Allocation works.
 "Line one"
 "Line two line two"
@@ -373,9 +373,9 @@ Count 2
 Array:  World
 Total Length: 6
 Original command: echo Hello, world!
-Escaped command: echo\ Hello,\ world!
+Escaped command: echo\ Hello\,\ world\!
 Unsafe Input: Hello, world!'; rm -rf / # ( && | > <
-Escaped Output: Hello,\ world!\'\;\ rm\ -rf\ /\ #\ \(\ \&\&\ \|\ \>\ \<
+Escaped Output: Hello\,\ world\!\'\;\ rm\ \-rf\ \/\ \#\ \(\ \&\&\ \|\ \>\ \<
 
 Original string: reverse
 Reversed string: esrever
@@ -652,20 +652,20 @@ Words file 2 is 985084
 Words file 3 is 985084
 Words file 4 is 985084
 All tests pass.
-==8291== 
-==8291== HEAP SUMMARY:
-==8291==     in use at exit: 0 bytes in 0 blocks
-==8291==   total heap usage: 787,211 allocs, 787,211 frees, 22,320,193 bytes allocated
-==8291== 
-==8291== All heap blocks were freed -- no leaks are possible
-==8291== 
-==8291== For lists of detected and suppressed errors, rerun with: -s
-==8291== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==8311== Memcheck, a memory error detector
-==8311== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==8311== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==8311== Command: ./decoupled_thorough_tests
-==8311== 
+==4590== 
+==4590== HEAP SUMMARY:
+==4590==     in use at exit: 0 bytes in 0 blocks
+==4590==   total heap usage: 787,211 allocs, 787,211 frees, 22,320,193 bytes allocated
+==4590== 
+==4590== All heap blocks were freed -- no leaks are possible
+==4590== 
+==4590== For lists of detected and suppressed errors, rerun with: -s
+==4590== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4610== Memcheck, a memory error detector
+==4610== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4610== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4610== Command: ./decoupled_thorough_tests
+==4610== 
 Test 1
 First element
 First element is good.
@@ -691,15 +691,15 @@ i = 900000, size [899999 => 8398932]
 i = 950000, size [949999 => 8398932]
 i = 1000000, size [999999 => 8398932]
 All tests passed!
-==8311== 
-==8311== HEAP SUMMARY:
-==8311==     in use at exit: 0 bytes in 0 blocks
-==8311==   total heap usage: 33 allocs, 33 frees, 25,200,324 bytes allocated
-==8311== 
-==8311== All heap blocks were freed -- no leaks are possible
-==8311== 
-==8311== For lists of detected and suppressed errors, rerun with: -s
-==8311== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==4610== 
+==4610== HEAP SUMMARY:
+==4610==     in use at exit: 0 bytes in 0 blocks
+==4610==   total heap usage: 33 allocs, 33 frees, 25,200,324 bytes allocated
+==4610== 
+==4610== All heap blocks were freed -- no leaks are possible
+==4610== 
+==4610== For lists of detected and suppressed errors, rerun with: -s
+==4610== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 Allocation works.
 "Line one"
 "Line two line two"
@@ -741,9 +741,9 @@ Count 2
 Array:  World
 Total Length: 6
 Original command: echo Hello, world!
-Escaped command: echo\ Hello,\ world!
+Escaped command: echo\ Hello\,\ world\!
 Unsafe Input: Hello, world!'; rm -rf / # ( && | > <
-Escaped Output: Hello,\ world!\'\;\ rm\ -rf\ /\ #\ \(\ \&\&\ \|\ \>\ \<
+Escaped Output: Hello\,\ world\!\'\;\ rm\ \-rf\ \/\ \#\ \(\ \&\&\ \|\ \>\ \<
 
 Original string: reverse
 Reversed string: esrever
@@ -862,13 +862,13 @@ Equal in size
 15
 
 MULTITHREAD
+12
+14
+16
 18
 20
 22
 24
-12
-14
-16
 26
 28
 30
@@ -905,7 +905,7 @@ Printing dict values
 4. is cute
 5. barks a lot
 To a
-{man: 0x565f5d13, frog: 0x565f5d06, banana: 0x565f5cd3, apple: 0x565f5cde, cat: 0x565f5cee, dog: 0x565f5cf6}
+{man: 0x56603d13, frog: 0x56603d06, banana: 0x56603cd3, apple: 0x56603cde, cat: 0x56603cee, dog: 0x56603cf6}
 {man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
 Adding 1000
 dict_destructor(my_dict)
