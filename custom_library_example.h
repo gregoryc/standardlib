@@ -82,6 +82,11 @@ struct MY_COMPANY_FrozenSet;
  * ---------------------------------------------------------------------
  */
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpragmas"
+#pragma GCC diagnostic ignored "-Wformat"
+#pragma GCC diagnostic ignored "-Wformat-extra-args"
+
 /* -DMY_COMPANY_FOUNDATIONAL_LIB_UNSAFE_FUNCTIONS_ENABLED=0 to turn off popen() and MY_COMPANY_backticks() and MY_COMPANY_shellescape(). */
 
 /** @brief
@@ -338,11 +343,11 @@ MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STATIC_ASSERT_MSG((sizeof(size_t) <= 8 &&
 #endif
 
 #ifndef MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRCHR
-#define MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRCHR
+#define MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRCHR strchr
 #endif
 
 #ifndef MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_MEMCHR
-#define MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_MEMCHR
+#define MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_MEMCHR memchr
 #endif
 
 #ifndef MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRSTR
@@ -2605,13 +2610,8 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_size_t_array_to_stream(co
     MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPUTC('[', stream);
     for (size_t i = 0; i < size; ++i)
     {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
         MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPRINTF(stream, "%zu", array[i]);
 
-#pragma GCC diagnostic pop
         if (i < size - 1)
         {
             MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPUTS(", ", stream);
@@ -2640,13 +2640,8 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_size_t_ptr_array_to_strea
     MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPUTC('[', stream);
     for (size_t i = 0; i < size; ++i)
     {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
 
         MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPRINTF(stream, "%zu", *array[i]);
-#pragma GCC diagnostic pop
         if (i < size - 1)
         {
             MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPUTS(", ", stream);
@@ -3642,7 +3637,7 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC char **MY_COMPANY_split(const char *str, size_t
     *output_size = 1;
     const size_t delim_len = MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRLEN(delim);
 
-    for (const char *ptr = MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRSTR(str, delim); ptr != NULL && (max_times == 0 || *output_size < max_times); ptr = strstr(ptr + delim_len, delim))
+    for (const char *ptr = MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRSTR(str, delim); ptr != NULL && (max_times == 0 || *output_size < max_times); ptr = MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_STRSTR(ptr + delim_len, delim))
     {
         ++(*output_size);
     }
@@ -3828,12 +3823,6 @@ overflow:
     MY_COMPANY_FOUNDATIONAL_LIB_die_aggressively_if_enabled();
     return NULL;
 }
-#ifdef _WIN32
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
-#endif
 
 /**
  * @brief Appends a new string to an existing string and updates its length and
@@ -8431,7 +8420,6 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC int MY_COMPANY_replace_memory(void *source, siz
 
         ++matches;
         p += find_len;
-        puts("FOR");
     }
 
     // Let's assume that it's 'likely' to find a match.
@@ -9121,6 +9109,8 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_reduce(void *array, size_t size
     }
 }
 
+// MY_COMPANY_filter_data() to avoid conflicts with curses
+
 /**
  * @brief Filters elements of an array (void* version) based on a specified
  * condition.
@@ -9156,7 +9146,7 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_reduce(void *array, size_t size
  *   // Example usage:
  *   int my_array[] = {1, 2, 3, 4, 5};
  *   int filtered_array[5]; // Assuming the worst case where all elements
- * satisfy the condition size_t num_filtered = MY_COMPANY_filter(my_array, 5, sizeof(int),
+ * satisfy the condition size_t num_filtered = MY_COMPANY_filter_data(my_array, 5, sizeof(int),
  * filtered_array, 5, is_even_condition);
  *   // After the call, filtered_array will contain {2, 4}, and num_filtered
  * will be 2
@@ -9165,9 +9155,8 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_reduce(void *array, size_t size
 MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_WARN_UNUSED_RESULT
 MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_NONNULL
 MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_NOTHROW
-MY_COMPANY_FOUNDATIONAL_LIB_FUNC size_t MY_COMPANY_filter(void *source, size_t source_size, size_t elem_size, void *destination, size_t dest_size, int (*condition)(void *))
+MY_COMPANY_FOUNDATIONAL_LIB_FUNC size_t MY_COMPANY_filter_data(void *source, size_t source_size, size_t elem_size, void *destination, size_t dest_size, int (*condition)(void *))
 {
-
     MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_ASSERT_ARGUMENT_IF_ENABLED(source);
     MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_ASSERT_ARGUMENT_IF_ENABLED(destination);
     MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_ASSERT_ARGUMENT_IF_ENABLED(condition);
@@ -9340,10 +9329,6 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void *MY_COMPANY_list_comprehension(const void 
     //
     // This code has no bug.
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wuse-after-free"
-
     /*
      * Make the result smaller to free a bit of memory. Not necessary, but it saves memory.
      * array_size * (*result_size) will not be larger than the current size.
@@ -9357,8 +9342,6 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void *MY_COMPANY_list_comprehension(const void 
         MY_COMPANY_FOUNDATIONAL_LIB_die_aggressively_if_enabled();
         return result;
     }
-
-#pragma GCC diagnostic pop
 
     /*
     ISO/IEC 9899:2011:
@@ -13425,13 +13408,7 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_long_long_to_stream(const
 {
     MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_ASSERT_ARGUMENT_IF_ENABLED(stream);
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
-
     MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPRINTF(stream, "%lld", value);
-#pragma GCC diagnostic pop
 }
 
 /**
@@ -13477,12 +13454,7 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_size_t_to_stream(const si
 {
     MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_ASSERT_ARGUMENT_IF_ENABLED(stream);
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
     MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPRINTF(stream, "%zu", value);
-#pragma GCC diagnostic pop
 }
 
 /**
@@ -13589,16 +13561,7 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_ulong_to_stream(const uns
  */
 MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_NONNULL
 MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_NOTHROW
-MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_ulong_long(const unsigned long long value)
-{
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
-    MY_COMPANY_MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_PRINTF("%llu", value);
-#pragma GCC diagnostic pop
-}
+MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_ulong_long(const unsigned long long value) { MY_COMPANY_MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_PRINTF("%llu", value); }
 
 /**
  * @brief Prints an unsigned long long value to the specified stream.
@@ -13611,12 +13574,7 @@ MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_NOTHROW
 MY_COMPANY_FOUNDATIONAL_LIB_FUNC void MY_COMPANY_print_ulong_long_to_stream(const unsigned long long value, FILE *stream)
 {
     MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_ASSERT_ARGUMENT_IF_ENABLED(stream);
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wformat"
-#pragma GCC diagnostic ignored "-Wformat-extra-args"
     MY_COMPANY_MY_COMPANY_MY_COMPANY_FOUNDATIONAL_LIB_FPRINTF(stream, "%llu", value);
-#pragma GCC diagnostic pop
 }
 /**
  * @brief Print an unsigned short value.
@@ -13940,6 +13898,8 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC int MY_COMPANY_download_websites(const char **w
     return 0;
 }
 
+#pragma GCC diagnostic pop
+
 #endif /* Networking. */
 
 /**
@@ -14001,7 +13961,5 @@ MY_COMPANY_FOUNDATIONAL_LIB_FUNC int MY_COMPANY_read_files_into_array(const char
 
     return 0;
 }
-
-#pragma GCC diagnostic pop /* Niche Wformat issues */
 
 #endif

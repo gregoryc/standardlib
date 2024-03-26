@@ -6,7 +6,7 @@ var searchData=
   ['file_5fis_5freadable_76',['file_is_readable',['../foundationallib_8h.html#ad1da3880ab529c2e9ecc5bccb55e1bbb',1,'foundationallib.h']]],
   ['file_5fis_5fregular_77',['file_is_regular',['../foundationallib_8h.html#a59c5a4e9312619a923efafc8b3102211',1,'foundationallib.h']]],
   ['file_5fis_5fwritable_78',['file_is_writable',['../foundationallib_8h.html#a5cc4406579fb572e529d7313dc7ef255',1,'foundationallib.h']]],
-  ['filter_79',['filter',['../foundationallib_8h.html#a90a332847ce4ef4afe9eba245ea7488a',1,'foundationallib.h']]],
+  ['filter_5fdata_79',['filter_data',['../foundationallib_8h.html#a6281fbcd76c275539ca924fecd202007',1,'foundationallib.h']]],
   ['filter_5ffilesystem_5ffiles_5fas_5fstrings_80',['filter_filesystem_files_as_strings',['../foundationallib_8h.html#ab6f1edc8ef8a01772650615166e22ab4',1,'foundationallib.h']]],
   ['filter_5ffunc_81',['filter_func',['../struct_thread_data.html#af0801f46377145d0151a8aabd5ee8b79',1,'ThreadData']]],
   ['filter_5fints_82',['filter_ints',['../foundationallib_8h.html#a58f0ba6b56491d49884378882242460f',1,'foundationallib.h']]],

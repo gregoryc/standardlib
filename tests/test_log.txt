@@ -1,3 +1,4 @@
+003c:err:service:process_send_command service protocol error - failed to write pipe!
 Allocation works.
 "Line one"
 "Line two line two"
@@ -48,7 +49,6 @@ Reversed string: esrever
 
 Does the string start with "This"? Yes
 Does the string end with "text"? Yes
-FOR
 Original sentence: The quick brown fox jumps over the lazy dog.
 Sentence after replacement: The quick brown cat jumps over the lazy dog.
 
@@ -190,7 +190,7 @@ Printing dict values
 4. is cute
 5. barks a lot
 To a
-{man: 00000000004188BF, frog: 00000000004188B2, banana: 000000000041887F, apple: 000000000041888A, cat: 000000000041889A, dog: 00000000004188A2}
+{man: 00000000004188B7, frog: 00000000004188AA, banana: 0000000000418877, apple: 0000000000418882, cat: 0000000000418892, dog: 000000000041889A}
 {man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
 Adding 1000
 dict_destructor(my_dict)
@@ -211,16 +211,16 @@ Frozenset | The value for 'banana' is: 1
 Frozenset | The value for 'apple' is: 1
 Frozenset | Frozenset size is 3
 Test 50 - randomness.
-date
-banana
 elderberry
 apple
 elderberry
+banana
+apple
+apple
+date
 banana
 cherry
 apple
-date
-banana
 Test 52
 3 size set should be. 3 <=> 3.
 Adding an additional 20,000 members to the set
@@ -273,7 +273,7 @@ dict destroyed test52
 Reading words file into array.
 /usr/share/dict/words is 104335 lines and we can efficiently play around with it in a more easy fashion than Python.
 Shuffling words
-Randomly chosen word is "apostasy's". Randomly chosen word is "outpatients". Randomly chosen word is "emetic's". Randomly chosen word is "oho". Randomly chosen word is "helpful". Randomly chosen word is "Kabul". Randomly chosen word is "ivy's". Randomly chosen word is "underclass's". Randomly chosen word is "crucially". Randomly chosen word is "gazers". Randomly chosen word is "pyrotechnics's". Randomly chosen word is "Flory's". Randomly chosen word is "chalked". Randomly chosen word is "MacBride". Randomly chosen word is "social's". Randomly chosen word is "whirligig's". Randomly chosen word is "twirled". Randomly chosen word is "roominess's". Randomly chosen word is "teetotaler". Randomly chosen word is "armistice's". Randomly chosen word is "proffered". Randomly chosen word is "Maine". Randomly chosen word is "harness". Randomly chosen word is "hymning". Randomly chosen word is "celesta". Randomly chosen word is "ever". Randomly chosen word is "redesigns". Randomly chosen word is "convinced". Randomly chosen word is "unbelief's". Randomly chosen word is "analyzer's". Randomly chosen word is "lion's". Randomly chosen word is "dead". Randomly chosen word is "disclaimer's". Randomly chosen word is "jays". Randomly chosen word is "intellectualized". Randomly chosen word is "Darth". Randomly chosen word is "cuttlefish's". Randomly chosen word is "attaching". Randomly chosen word is "fascination's". Randomly chosen word is "dreadful". Randomly chosen word is "stuns". Randomly chosen word is "console". Randomly chosen word is "unmodified". Randomly chosen word is "Reaganomics's". Randomly chosen word is "padlock's". Randomly chosen word is "tendon". Randomly chosen word is "infusion's". Randomly chosen word is "infielder's". Randomly chosen word is "Merthiolate". Randomly chosen word is "nab". Randomly chosen word is "jay". Randomly chosen word is "buyer's". Randomly chosen word is "Rayleigh's". Randomly chosen word is "Candide". Randomly chosen word is "socialization's". Randomly chosen word is "wear". Randomly chosen word is "Actaeon". Randomly chosen word is "cruddy". Randomly chosen word is "shiftiness". Randomly chosen word is "printouts". Randomly chosen word is "Dixon". Randomly chosen word is "fruit's". Randomly chosen word is "Dawn". Randomly chosen word is "delectable". Randomly chosen word is "sup". Randomly chosen word is "assiduous". Randomly chosen word is "Chasity". Randomly chosen word is "Vladivostok". Randomly chosen word is "dialect's". Randomly chosen word is "cheeses". Randomly chosen word is "tickle". Randomly chosen word is "Sherri's". Randomly chosen word is "pureness's". Randomly chosen word is "brusquely". Randomly chosen word is "rapaciously". Randomly chosen word is "hat's". Randomly chosen word is "rededicated". Randomly chosen word is "p". Randomly chosen word is "sarcomas". Randomly chosen word is "bitchy". Randomly chosen word is "leukemia". Randomly chosen word is "lame's". Randomly chosen word is "Peoria's". Randomly chosen word is "nonabsorbents". 
+Randomly chosen word is "Murasaki". Randomly chosen word is "frippery". Randomly chosen word is "situ". Randomly chosen word is "idealizes". Randomly chosen word is "variation". Randomly chosen word is "pull's". Randomly chosen word is "fishhook's". Randomly chosen word is "evildoers". Randomly chosen word is "nonprofit's". Randomly chosen word is "marinas". Randomly chosen word is "geodes". Randomly chosen word is "comparative's". Randomly chosen word is "quibbler's". Randomly chosen word is "looniest". Randomly chosen word is "laddered". Randomly chosen word is "trustful". Randomly chosen word is "lads". Randomly chosen word is "activate". Randomly chosen word is "porcelain's". Randomly chosen word is "earrings". Randomly chosen word is "pomade's". Randomly chosen word is "Juvenal's". Randomly chosen word is "Eliseo's". Randomly chosen word is "orchestrated". Randomly chosen word is "dub". Randomly chosen word is "pretend". Randomly chosen word is "scissors". Randomly chosen word is "drop". Randomly chosen word is "lanyard". Randomly chosen word is "circuitously". Randomly chosen word is "fortieth". Randomly chosen word is "Fatah". Randomly chosen word is "hat". Randomly chosen word is "houmus". Randomly chosen word is "habits". Randomly chosen word is "reliefs". Randomly chosen word is "quirkier". Randomly chosen word is "shittier". Randomly chosen word is "kidnaper". Randomly chosen word is "proudly". Randomly chosen word is "chew's". Randomly chosen word is "liveable". Randomly chosen word is "butcher". Randomly chosen word is "hydroelectric". Randomly chosen word is "fluency's". Randomly chosen word is "headway". Randomly chosen word is "ostracize". Randomly chosen word is "foreseeable". Randomly chosen word is "amplifier". Randomly chosen word is "quarantine". Randomly chosen word is "thieve". Randomly chosen word is "heterosexual". Randomly chosen word is "chainsaw's". Randomly chosen word is "oppression". Randomly chosen word is "Wright". Randomly chosen word is "nubile". Randomly chosen word is "skier". Randomly chosen word is "outstretch". Randomly chosen word is "imperialists". Randomly chosen word is "preclusion's". Randomly chosen word is "warehouses". Randomly chosen word is "worrywarts". Randomly chosen word is "expletive". Randomly chosen word is "vented". Randomly chosen word is "asynchronous". Randomly chosen word is "hales". Randomly chosen word is "petitions". Randomly chosen word is "armies". Randomly chosen word is "Pittsfield". Randomly chosen word is "zucchinis". Randomly chosen word is "Newark". Randomly chosen word is "tableware". Randomly chosen word is "curled". Randomly chosen word is "bullfighter". Randomly chosen word is "unfairer". Randomly chosen word is "prolixity's". Randomly chosen word is "hospital". Randomly chosen word is "jinxed". Randomly chosen word is "chrysanthemums". Randomly chosen word is "TensorFlow's". Randomly chosen word is "overclocking". Randomly chosen word is "DeGeneres". Randomly chosen word is "Mickie". Randomly chosen word is "Ted's". Randomly chosen word is "secretariats". Randomly chosen word is "abdicating". Randomly chosen word is "expires". Randomly chosen word is "dashiki". Randomly chosen word is "communist's". Randomly chosen word is "Pentecostal". Randomly chosen word is "birches". Randomly chosen word is "Caucasian's". Randomly chosen word is "Qualcomm". Randomly chosen word is "cuff". Randomly chosen word is "unexceptional". Randomly chosen word is "Beretta". Randomly chosen word is "hegemony". Randomly chosen word is "Pollux's". Randomly chosen word is "clove". Randomly chosen word is "EST". Randomly chosen word is "sagest". Randomly chosen word is "earns". Randomly chosen word is "Twizzlers". Randomly chosen word is "rustic's". Randomly chosen word is "grunting". Randomly chosen word is "Jacobean's". Randomly chosen word is "palpation". Randomly chosen word is "clank". Randomly chosen word is "creamier". Randomly chosen word is "paramour's". Randomly chosen word is "cesarian". Randomly chosen word is "genealogy's". Randomly chosen word is "transience". Randomly chosen word is "skydiver". Randomly chosen word is "malnutrition". Randomly chosen word is "intermediary". Randomly chosen word is "literates". Randomly chosen word is "slats". Randomly chosen word is "community". 
 Test 54.
 Test 1 passes.
 Test 2 passes.
@@ -284,11 +284,7 @@ Replaced: [foo, Dog] example [Replacement #2]
 Test new 2
 Hello world
 Cat Hello, world! Hello, universe!
-FOR
-FOR
 Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
-FOR
-FOR
 Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
 1000 iterations
 Cat Hello, world! Hello, universe!
@@ -327,11 +323,11 @@ i = 900000, size [899999 => 8398932]
 i = 950000, size [949999 => 8398932]
 i = 1000000, size [999999 => 8398932]
 All tests passed!
-==4590== Memcheck, a memory error detector
-==4590== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==4590== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==4590== Command: ./lib_and_tests
-==4590== 
+==24646== Memcheck, a memory error detector
+==24646== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==24646== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==24646== Command: ./lib_and_tests
+==24646== 
 Allocation works.
 "Line one"
 "Line two line two"
@@ -382,7 +378,6 @@ Reversed string: esrever
 
 Does the string start with "This"? Yes
 Does the string end with "text"? Yes
-FOR
 Original sentence: The quick brown fox jumps over the lazy dog.
 Sentence after replacement: The quick brown cat jumps over the lazy dog.
 
@@ -537,7 +532,7 @@ Printing dict values
 4. is cute
 5. barks a lot
 To a
-{man: 0x11cdaf, frog: 0x11cda2, banana: 0x11cd6f, apple: 0x11cd7a, cat: 0x11cd8a, dog: 0x11cd92}
+{man: 0x11cda7, frog: 0x11cd9a, banana: 0x11cd67, apple: 0x11cd72, cat: 0x11cd82, dog: 0x11cd8a}
 {man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
 Adding 1000
 dict_destructor(my_dict)
@@ -634,11 +629,7 @@ Replaced: [foo, Dog] example [Replacement #2]
 Test new 2
 Hello world
 Cat Hello, world! Hello, universe!
-FOR
-FOR
 Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
-FOR
-FOR
 Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
 1000 iterations
 Cat Hello, world! Hello, universe!
@@ -652,20 +643,20 @@ Words file 2 is 985084
 Words file 3 is 985084
 Words file 4 is 985084
 All tests pass.
-==4590== 
-==4590== HEAP SUMMARY:
-==4590==     in use at exit: 0 bytes in 0 blocks
-==4590==   total heap usage: 787,211 allocs, 787,211 frees, 22,320,193 bytes allocated
-==4590== 
-==4590== All heap blocks were freed -- no leaks are possible
-==4590== 
-==4590== For lists of detected and suppressed errors, rerun with: -s
-==4590== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==4610== Memcheck, a memory error detector
-==4610== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==4610== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==4610== Command: ./decoupled_thorough_tests
-==4610== 
+==24646== 
+==24646== HEAP SUMMARY:
+==24646==     in use at exit: 0 bytes in 0 blocks
+==24646==   total heap usage: 787,211 allocs, 787,211 frees, 22,320,193 bytes allocated
+==24646== 
+==24646== All heap blocks were freed -- no leaks are possible
+==24646== 
+==24646== For lists of detected and suppressed errors, rerun with: -s
+==24646== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==24666== Memcheck, a memory error detector
+==24666== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==24666== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==24666== Command: ./decoupled_thorough_tests
+==24666== 
 Test 1
 First element
 First element is good.
@@ -691,15 +682,15 @@ i = 900000, size [899999 => 8398932]
 i = 950000, size [949999 => 8398932]
 i = 1000000, size [999999 => 8398932]
 All tests passed!
-==4610== 
-==4610== HEAP SUMMARY:
-==4610==     in use at exit: 0 bytes in 0 blocks
-==4610==   total heap usage: 33 allocs, 33 frees, 25,200,324 bytes allocated
-==4610== 
-==4610== All heap blocks were freed -- no leaks are possible
-==4610== 
-==4610== For lists of detected and suppressed errors, rerun with: -s
-==4610== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==24666== 
+==24666== HEAP SUMMARY:
+==24666==     in use at exit: 0 bytes in 0 blocks
+==24666==   total heap usage: 33 allocs, 33 frees, 25,200,324 bytes allocated
+==24666== 
+==24666== All heap blocks were freed -- no leaks are possible
+==24666== 
+==24666== For lists of detected and suppressed errors, rerun with: -s
+==24666== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 Allocation works.
 "Line one"
 "Line two line two"
@@ -750,7 +741,6 @@ Reversed string: esrever
 
 Does the string start with "This"? Yes
 Does the string end with "text"? Yes
-FOR
 Original sentence: The quick brown fox jumps over the lazy dog.
 Sentence after replacement: The quick brown cat jumps over the lazy dog.
 
@@ -905,7 +895,7 @@ Printing dict values
 4. is cute
 5. barks a lot
 To a
-{man: 0x56603d13, frog: 0x56603d06, banana: 0x56603cd3, apple: 0x56603cde, cat: 0x56603cee, dog: 0x56603cf6}
+{man: 0x5656cd0f, frog: 0x5656cd02, banana: 0x5656cccf, apple: 0x5656ccda, cat: 0x5656ccea, dog: 0x5656ccf2}
 {man: walks, frog: ribbits, banana: is curved., apple: is red or green, cat: is cute, dog: barks a lot}
 Adding 1000
 dict_destructor(my_dict)
@@ -1002,11 +992,7 @@ Replaced: [foo, Dog] example [Replacement #2]
 Test new 2
 Hello world
 Cat Hello, world! Hello, universe!
-FOR
-FOR
 Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
-FOR
-FOR
 Cat aaaaaaaaaaaaa, world! aaaaaaaaaaaaa, universe!
 1000 iterations
 Cat Hello, world! Hello, universe!

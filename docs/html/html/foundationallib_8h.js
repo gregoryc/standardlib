@@ -157,7 +157,7 @@ var foundationallib_8h =
     [ "file_is_readable", "foundationallib_8h.html#ad1da3880ab529c2e9ecc5bccb55e1bbb", null ],
     [ "file_is_regular", "foundationallib_8h.html#a59c5a4e9312619a923efafc8b3102211", null ],
     [ "file_is_writable", "foundationallib_8h.html#a5cc4406579fb572e529d7313dc7ef255", null ],
-    [ "filter", "foundationallib_8h.html#a90a332847ce4ef4afe9eba245ea7488a", null ],
+    [ "filter_data", "foundationallib_8h.html#a6281fbcd76c275539ca924fecd202007", null ],
     [ "filter_filesystem_files_as_strings", "foundationallib_8h.html#ab6f1edc8ef8a01772650615166e22ab4", null ],
     [ "filter_ints", "foundationallib_8h.html#a58f0ba6b56491d49884378882242460f", null ],
     [ "find_first_of", "foundationallib_8h.html#af2642ef0e2c282f6cff4fe1e855009c0", null ],

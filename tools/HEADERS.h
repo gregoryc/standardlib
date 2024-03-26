@@ -155,7 +155,7 @@ size_t count_occurrences_of_substr(const char *str, const char *substring);
 size_t count_occurrences_of_substr_len(const char *string, size_t string_length, const char *substring, size_t substring_length);
 size_t dict_hash(const char *key, size_t capacity);
 size_t dict_size(struct Dict *dict);
-size_t filter(void *source, size_t source_size, size_t elem_size, void *destination, size_t dest_size, int (*condition)(void *));
+size_t filter_data(void *source, size_t source_size, size_t elem_size, void *destination, size_t dest_size, int (*condition)(void *));
 size_t frozen_dict_size(struct FrozenDict *dict);
 size_t frozen_dict_to_array(struct FrozenDict *dict, char ***keys, void ***values, size_t *size_of_keys_and_values);
 size_t frozen_set_size(struct FrozenSet *set);

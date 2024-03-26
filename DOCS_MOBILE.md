@@ -2120,15 +2120,15 @@ See docs.html for API reference.
 
 
           Returns 1 if the file is writable, and 0 otherwise.
- <h2>filter()</h2>
+ <h2>filter_data()</h2>
 
-   FOUNDATIONAL_LIB_FUNC size_t filter ( void *          source,
-                                               size_t          source_size,
-                                               size_t          elem_size,
-                                               void *          destination,
-                                               size_t          dest_size,
-                                               int(*)(void *)  condition
-                                             )
+   FOUNDATIONAL_LIB_FUNC size_t filter_data ( void *          source,
+                                                    size_t          source_size,
+                                                    size_t          elem_size,
+                                                    void *          destination,
+                                                    size_t          dest_size,
+                                                    int(*)(void *)  condition
+                                                  )
 
    Filters elements of an array (void* version) based on a specified
    condition.
@@ -2175,18 +2175,18 @@ See docs.html for API reference.
    // Example usage:
    int my_array[] = {1, 2, 3, 4, 5};
    int filtered_array; // Assuming the worst case where all elements
-   satisfy the condition size_t num_filtered = filter(my_array, 5,
-   sizeof(int),
+   satisfy the condition size_t num_filtered = filter_data(my_array,
+   5, sizeof(int),
    filtered_array, 5, is_even_condition);
    // After the call, filtered_array will contain {2, 4}, and num_filtered
    will be 2
-   filter
-   FOUNDATIONAL_LIB_FUNC size_t filter(void *source, size_t source_size,
-   size_t elem_size, void *destination, size_t dest_size,
+   filter_data
+   FOUNDATIONAL_LIB_FUNC size_t filter_data(void *source, size_t
+   source_size, size_t elem_size, void *destination, size_t dest_size,
    int(*condition)(void *))
    Filters elements of an array (void* version) based on a specified
    condition.
-   Definition: foundationallib.h:8550
+   Definition: foundationallib.h:8540
  <h2>filter_filesystem_files_as_strings()</h2>
 
    FOUNDATIONAL_LIB_FUNC int filter_filesystem_files_as_strings (
@@ -2273,7 +2273,7 @@ See docs.html for API reference.
    FOUNDATIONAL_LIB_FUNC int filter_ints(int *source, size_t source_size,
    int *destination, int(*condition)(int))
    Filters elements of an integer array based on a specified condition.
-   Definition: foundationallib.h:8395
+   Definition: foundationallib.h:8383
  <h2>find_first_of()</h2>
 
    FOUNDATIONAL_LIB_FUNC ssize_t find_first_of ( const char *  str,
@@ -3858,7 +3858,7 @@ See docs.html for API reference.
    FOUNDATIONAL_LIB_FUNC int is_array_digit(const char **array, size_t
    size)
    Check if a string array contains only digits.
-   Definition: foundationallib.h:9506
+   Definition: foundationallib.h:9489
  <h2>is_array_lower()</h2>
 
    FOUNDATIONAL_LIB_FUNC int is_array_lower ( const char **  array,
@@ -4333,7 +4333,7 @@ See docs.html for API reference.
 
    Perform a list comprehension operation.
 
-   Definition: foundationallib.h:8667
+   Definition: foundationallib.h:8656
 
    // Example Usage 2: Transform each string to uppercase and filter out
    those
@@ -4547,7 +4547,7 @@ See docs.html for API reference.
    FOUNDATIONAL_LIB_FUNC void map(void *array, size_t size, size_t
    elem_size, void(*transform)(void *))
    Applies a transformation to each element of an array (void* version).
-   Definition: foundationallib.h:8442
+   Definition: foundationallib.h:8430
  <h2>map_filesystem_files_as_strings()</h2>
 
    FOUNDATIONAL_LIB_FUNC int map_filesystem_files_as_strings ( const
@@ -4625,7 +4625,7 @@ See docs.html for API reference.
    FOUNDATIONAL_LIB_FUNC void map_ints(int *array, size_t size,
    int(*transform)(int))
    Applies a transformation to each element of an integer array.
-   Definition: foundationallib.h:8302
+   Definition: foundationallib.h:8290
  <h2>memmem()</h2>
 
    void* memmem ( const void *  haystack,
@@ -6388,7 +6388,7 @@ See docs.html for API reference.
    elem_size, void *result, void(*operation)(void *, void *))
    Performs a reduction on an array (void* version) using a binary
    operation.
-   Definition: foundationallib.h:8488
+   Definition: foundationallib.h:8476
  <h2>reduce_filesystem_files_as_strings()</h2>
 
    FOUNDATIONAL_LIB_FUNC char* reduce_filesystem_files_as_strings (
@@ -6475,7 +6475,7 @@ See docs.html for API reference.
    FOUNDATIONAL_LIB_FUNC int reduce_ints(int *array, size_t size,
    int(*operation)(int, int))
    Performs a reduction on an integer array using a binary operation.
-   Definition: foundationallib.h:8344
+   Definition: foundationallib.h:8332
  <h2>reject_array()</h2>
 
    FOUNDATIONAL_LIB_FUNC void* reject_array ( const void *  source,
@@ -8643,7 +8643,7 @@ ed-wise depending on machine. On one of my machines, memmem() was MUCH faster
    FOUNDATIONAL_LIB_FUNC int string_array_uniq(const char **array, size_t
    size, char ***output, size_t *output_size)
    Remove duplicate strings from a string array.
-   Definition: foundationallib.h:9622
+   Definition: foundationallib.h:9605
  <h2>string_array_uniq_adjacent()</h2>
 
    FOUNDATIONAL_LIB_FUNC int string_array_uniq_adjacent ( const char
@@ -8704,7 +8704,7 @@ ed-wise depending on machine. On one of my machines, memmem() was MUCH faster
    FOUNDATIONAL_LIB_FUNC int string_array_uniq_adjacent(const char
    **first_array, size_t size, char ***new_array, size_t *new_size)
    Remove adjacent duplicate strings from a string array.
-   Definition: foundationallib.h:9722
+   Definition: foundationallib.h:9705
  <h2>string_has_substr()</h2>
 
    FOUNDATIONAL_LIB_FUNC int string_has_substr ( const char *
@@ -9126,9 +9126,9 @@ Macros
 
    #define  FOUNDATIONAL_LIB_STRPBRK   strpbrk
 
-   #define  FOUNDATIONAL_LIB_STRCHR
+   #define  FOUNDATIONAL_LIB_STRCHR   strchr
 
-   #define  FOUNDATIONAL_LIB_MEMCHR
+   #define  FOUNDATIONAL_LIB_MEMCHR   memchr
 
    #define  FOUNDATIONAL_LIB_STRSTR   strstr
 
@@ -10342,9 +10342,9 @@ Functions
      Performs a reduction on an array (void* version) using a binary
    operation. More...
 
-   FOUNDATIONAL_LIB_FUNC size_t  filter (void *source, size_t
-   source_size, size_t elem_size, void *destination, size_t dest_size,
-   int(*condition)(void *))
+   FOUNDATIONAL_LIB_FUNC size_t  filter_data (void *source,
+   size_t source_size, size_t elem_size, void *destination, size_t
+   dest_size, int(*condition)(void *))
      Filters elements of an array (void* version) based on a specified
    condition. More...
 
@@ -10889,10 +10889,10 @@ Macro Definition Documentation
    FOUNDATIONAL_LIB_aggressive_die
    FOUNDATIONAL_LIB_AGGRESSIVE_DIE_TYPE FOUNDATIONAL_LIB_aggressive_die
    Global variable to control aggressive die behavior.
-   Definition: foundationallib.h:854
+   Definition: foundationallib.h:859
    FOUNDATIONAL_LIB_UNLIKELY
    #define FOUNDATIONAL_LIB_UNLIKELY(x)
-   Definition: foundationallib.h:424
+   Definition: foundationallib.h:429
 
    Macro to die aggressively if enabled.
 
@@ -11008,7 +11008,7 @@ Macro Definition Documentation
    #define FOUNDATIONAL_LIB_LOW_MEMORY_USAGE   12
  <h2>FOUNDATIONAL_LIB_MEMCHR</h2>
 
-   #define FOUNDATIONAL_LIB_MEMCHR
+   #define FOUNDATIONAL_LIB_MEMCHR   memchr
  <h2>FOUNDATIONAL_LIB_MEMCMP</h2>
 
    #define FOUNDATIONAL_LIB_MEMCMP   memcmp
@@ -11068,7 +11068,7 @@ Macro Definition Documentation
    size_t *ptr)
    Safely add 2 numbers to avoid unsigned integer overflows and security
    and stability issues....
-   Definition: foundationallib.h:595
+   Definition: foundationallib.h:600
  <h2>FOUNDATIONAL_LIB_set_aggressive_die</h2>
 
    #define FOUNDATIONAL_LIB_set_aggressive_die (   mode )
@@ -11105,7 +11105,7 @@ Macro Definition Documentation
    )    FOUNDATIONAL_LIB_Static_assert((true_cond), failure_message)
  <h2>FOUNDATIONAL_LIB_STRCHR</h2>
 
-   #define FOUNDATIONAL_LIB_STRCHR
+   #define FOUNDATIONAL_LIB_STRCHR   strchr
  <h2>FOUNDATIONAL_LIB_STRCMP</h2>
 
    #define FOUNDATIONAL_LIB_STRCMP   strcmp
